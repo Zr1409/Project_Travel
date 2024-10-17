@@ -1,0 +1,637 @@
+<title>Giỏ hàng</title>
+<!-- <script src="js/jquery.min.js"></script> -->
+<!-- Custom Theme files -->
+<link rel="stylesheet" href="css/cssgiohang-hanoi-danang-bana-hill.css">
+<!-- for-mobile-apps -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+    content="Classy Login form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<!-- //for-mobile-apps -->
+<!--Google Fonts-->
+<link href='//fonts.googleapis.com/css?family=Roboto+Condensed:400,700' rel='stylesheet' type='text/css'>
+<link rel="icon" href="images/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Thêm slick.css -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<!-- Thêm slick-theme.css -->
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+<!--AngularJS  -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<body ng-controller="myCtrlGioHang">
+    <form name="frBonus">
+        <div class="booktour-wrapper" style="padding-top: 120px;
+            margin-bottom: 30px;">
+            <div class="container">
+                <form action="/BookTour/SendBooking" id="bk-tour" method="post">
+                    <div class="row ml-n3 mr-n3">
+                        <div class="col-lg-9 col-md-12">
+                            <div class="pay-product border" style="padding-left: 10px;
+                                padding-right:10px">
+                                <h3 style="text-align: center; margin-top: 10px; margin-bottom: 10px;font-size: 26px;"
+                                    class="text-uppercase booktour__head">CHI TIẾT GIỎ HÀNG</h3>
+                                <div class="card-detail-wp border" style="border-radius: 4px;"
+                                    ng-repeat="detailPro in gioHang">
+
+                                    <div class="cart-detail " style="padding: 15px;
+                                             background-color: #e4f4fb;">
+                                        <div class="row align-items-stretch">
+                                            <div class="col-lg-3 col-md-4">
+                                                <div class="product-avatar" style="border-radius: 3px;
+                                                     overflow: hidden;">
+                                                    <img style="height: 164px;
+                                                    object-fit: cover;" ng-src="{{detailPro.image[0]}}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9 col-md-8 pl-lg-0">
+                                                <div class="product-detail position-relative">
+                                                    <h3 class="cart__name" style="font-size: 20px;
+                                                        font-weight: 700;
+                                                        margin-right: 30px;">
+                                                        {{detailPro.title}}
+                                                    </h3>
+                                                    <div class="productdetail-list">
+                                                        <div class="cart__start-point productdetail-item">
+                                                            <i class="bi bi-geo-alt-fill text-primary-emphasis"></i>
+                                                            <span><strong>Điểm khởi hành:
+                                                                    {{detailPro.departure}}</strong></span>
+                                                        </div>
+                                                        <div class="cart__transport productdetail-item">
+                                                            <i class="bi bi-person-walking text-primary-emphasis"></i>
+                                                            <span>Phương tiện:
+                                                                <strong> {{detailPro.transport}}</strong></span>
+                                                        </div>
+                                                        <div class="cart__slot productdetail-item">
+                                                            <i class="bi bi-person-fill text-primary-emphasis"></i>
+                                                            <span>Số chỗ trống:
+                                                                <strong>{{detailPro.slots}}</strong></span>
+                                                        </div>
+                                                        <div class="cart__time productdetail-item">
+                                                            <i class="bi bi-clock-fill text-primary-emphasis"></i>
+                                                            <span>Thời gian:
+                                                                <strong>{{detailPro.duration}}</strong></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="cart-close text-danger "
+                                                        ng-click="removeFromCart(detailPro)">
+                                                        <i style="font-size: 25px;" class="bi bi-trash3-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="cart-detail__bar" style="align-items: center;
+                                        padding: 15px;
+                                        font-size: 14px;
+                                        display: flex;">
+                                        <div class="cart__timedepart" style="flex-basis: 18%;">
+                                            <p>Khởi hành: <span></span></p>
+                                            <p>Ngày: <span>{{detailPro.date}}</span></p>
+                                        </div>
+
+                                        <div class="cart__pricelist " style=" flex-basis: 64%;
+                                                border-left: 1px solid #bbb;
+                                                border-right: 1px solid #bbb;
+                                                padding-left: 10px;">
+                                            <div class="cart_unitprice">
+                                                <span id="tour-price" style="display:none">3700000</span>
+                                                Giá bán mặc định:
+                                                <span style="color: red;" class="text--red price-defaut"
+                                                    data-format="currency">
+                                                    {{detailPro.price | number}} đ
+                                                </span>
+
+                                                <div class="choise-cartnumber mt-3"
+                                                    style="display: flex; align-items: center; font-size: 15px; margin-top: 5px;">
+                                                    <span style="cursor: pointer;"
+                                                        class="quantity-down-tour tour-quantity"
+                                                        ng-click="decreaseQuantity(detailPro)">
+                                                        <i class="bi bi-dash-circle-fill text-primary"></i>
+                                                    </span>
+                                                    <input readonly
+                                                        style="font-size: 20px; width: 30px; font-weight: 600; outline: none; border: 0; margin: 0; padding: 0; border-radius: 0; cursor: pointer; text-align: center;"
+                                                        type="text" name="number-tour" value="1" id="select-number-tour"
+                                                        ng-model="detailPro.selectedNumber">
+                                                    <span class="quantity-up-tour tour-quantity text--blue"
+                                                        ng-click="increaseQuantity(detailPro)">
+                                                        <i class="bi bi-plus-circle-fill text-primary"></i>
+                                                    </span>
+                                                    <p class="font-weight-bold"
+                                                        style="margin-left: 10px; margin-bottom: 0; align-self: center;">
+                                                        = <span style="font-weight:bold"
+                                                            class="tour-price-add text-danger mr-1"
+                                                            data-format="currency">{{ detailPro.totalPrice |
+                                                            number}}</span>
+                                                        <span style="font-weight: bold;" class="text-danger">đ</span>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                            <!-- car -->
+
+                                            <div class="cart_unitprice mt-3">
+                                                <p>
+                                                    <span id="car-price" style="display:none;">500000</span>
+                                                    Giá thuê xe:
+                                                    <span class="text-danger price-defaut" data-format="currency">
+                                                        500,000 đ
+                                                    </span>
+                                                </p>
+                                                <div class="choise-cartnumber mt-0" style="display: flex;
+                                                    align-items: center;
+                                                    font-size: 15px;
+                                                    margin-top: 0px;">
+                                                    <span class="quantity-down-car car-quantity text-primary"
+                                                        ng-click="decreaseCarQuantity(detailPro)">
+                                                        <i class="bi bi-dash-circle-fill text-primary"></i>
+                                                    </span>
+                                                    <input readonly class="mt-0"
+                                                        style="font-size: 20px; width: 30px; font-weight: 600; outline: none; border: 0; margin: 0; padding: 0; border-radius: 0; cursor: pointer; text-align: center;"
+                                                        type="text" name="number-car" value="0" id="select-number-car"
+                                                        ng-model="detailPro.selectedCarNumber">
+                                                    <span class="quantity-up-car car-quantity text--blue"
+                                                        ng-click="increaseCarQuantity(detailPro)">
+                                                        <i class="bi bi-plus-circle-fill text-primary"></i>
+                                                    </span>
+                                                    <p class="font-weight-bold"
+                                                        style="margin-left: 10px; margin-bottom: 0; align-self: center;">
+                                                        = <span style="font-weight:bold"
+                                                            class="car-price-add text-danger mr-1"
+                                                            data-format="currency">{{ detailPro.totalCarPrice |
+                                                            number}}</span>
+                                                        <span style="font-weight: bold;" class="text-danger">đ</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <!--Yacht  -->
+                                            <div class="cart_unitprice mt-3">
+                                                <p>
+                                                    <span id="yacht-price" style="display:none">1000000</span>
+                                                    Giá thuê du thuyền:
+                                                    <span class="text-danger price-defaut" data-format="currency">
+                                                        1,000,000 đ
+                                                    </span>
+                                                </p>
+                                                <div class="choise-cartnumber" style="display: flex;
+                                                    align-items: center;
+                                                    font-size: 15px;
+                                                    margin-top: 5px;">
+                                                    <span class="quantity-down-yacht yacht-quantity text-primary"
+                                                        ng-click="decreaseYachtQuantity(detailPro)">
+                                                        <i class="bi bi-dash-circle-fill text-primary"></i>
+                                                    </span>
+                                                    <input readonly
+                                                        style="font-size: 20px; width: 30px; font-weight: 600; outline: none; border: 0; margin: 0; padding: 0; border-radius: 0; cursor: pointer; text-align: center;"
+                                                        type="text" name="number-yacht" value="0"
+                                                        id="select-number-yacht"
+                                                        ng-model="detailPro.selectedYachtNumber">
+                                                    <span class="quantity-up-yacht yacht-quantity text--blue"
+                                                        ng-click="increaseYachtQuantity(detailPro)">
+                                                        <i class="bi bi-plus-circle-fill text-primary"></i>
+                                                    </span>
+                                                    <p class="font-weight-bold"
+                                                        style="margin-left: 10px; margin-bottom: 0; align-self: center;">
+                                                        = <span style="font-weight:bold"
+                                                            class=" yacht-price-add text-danger mr-1"
+                                                            data-format="currency">{{detailPro.totalYachtPrice |number
+                                                            }}</span>
+                                                        <span style="font-weight: bold;" class="text-danger">đ</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="cart__totalprice" style="flex-basis: 18%;
+                                            padding-left: 10px;">
+                                            <p>Thành tiền</p>
+                                            <p class="text-danger font-weight-bold">
+                                                <span style="font-weight:bold" class="price-product mr-1"
+                                                    data-format="currency">{{ (detailPro.totalPrice +
+                                                    detailPro.totalCarPrice +
+                                                    detailPro.totalYachtPrice) | number}}</span>
+                                                <span style="font-weight: bold;" class="text-danger">đ</span>
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="card-empty" ng-if="gioHang.length === 0">
+                                    <i style="font-size: 50px;" class="bi bi-cart-x-fill text-danger"></i>
+                                    <p>Giỏ hàng của bạn đang trống</p>
+                                    <div class="back-home">
+                                        <a href="index.html" class="backhome-btn text-decoration-none">Quay trở lại
+                                            trang chủ</a>
+                                    </div>
+                                    
+                                </div>
+
+
+                                <!-- end end giá -->
+
+
+
+
+                                <div class="pay-form">
+                                    <h4>Thông tin liên hệ</h4>
+                                    <p class="payform-note">
+                                        Thông tin có dấu <span class="text-danger">(*)</span> là bắt buộc phải
+                                        nhập. Xin quý khách
+                                        vui lòng kiểm tra kỹ thông tin <strong>email, điện thoại</strong> để tránh bị
+                                        sai
+                                        sót.
+                                    </p>
+
+                                    <div class="payform__info payform__item">
+                                        <div class="form__group">
+                                            <label for="name-str">Quý danh<span class="text-danger">(*)</span></label>
+                                            <select name="Gender" id="name-str" class="form__control" ng-model="gender"
+                                                required>
+                                                <option value="">Chọn quý danh</option>
+                                                <option value="Mr">Ông</option>
+                                                <option value="Miss/Mrs">Bà</option>
+                                            </select>
+                                            <span style="color: red;"
+                                                ng-show="submitted && frBonus.Gender.$invalid">*Vui lòng chọn giới
+                                                tính</span>
+                                        </div>
+                                        <div class="form__group">
+                                            <label for="name">Họ và tên<span class="text-danger">(*)</span></label>
+                                            <input type="text" id="name" name="name" placeholder="Vui lòng nhập họ tên"
+                                                class="form__control" ng-model="fullname" required>
+                                            <span style="color: red;" ng-show="submitted && frBonus.name.$invalid">*Vui
+                                                lòng nhập họ tên</span>
+                                        </div>
+                                        <div class="form__group">
+                                            <label for="Country">Quốc gia</label>
+                                            <select id="Country" name="Country" class="form__control">
+                                                <option value="">Lựa chọn quốc gia</option>
+                                                <option value="Vietnam" selected="selected">Vietnam</option>
+                                                <option value="Malaysia">Malaysia</option>
+                                                <option value="Indonesia">Indonesia</option>
+                                                <option value="Thailand">Thailand</option>
+                                                <option value="Lao">Lao</option>
+                                                <option value="Singapo">Singapo</option>
+                                                <option value="Myanma">Myanma</option>
+                                                <option value="Campuchia">Campuchia</option>
+                                                <option value="DongTiMo">DongTiMo</option>
+                                                <option value="Philipin">Philipin</option>
+                                                <option value="Brunei">Brunei</option>
+                                            </select>
+                                        </div>
+                                        <div class="form__group">
+                                            <label for="city">Thành phố</label>
+                                            <select name="City" id="city" class="form__control">
+                                                <option value="">Chọn thành phố</option>
+                                                <option value="Hà Nội">Hà Nội</option>
+                                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                                <option value="Hải Phòng">Hải Phòng</option>
+                                                <option value="Đà Nẵng">Đà Nẵng</option>
+                                                <option value="Hà Giang">Hà Giang</option>
+                                                <option value="Cao Bằng">Cao Bằng</option>
+                                                <option value="Lai Châu">Lai Châu</option>
+                                                <option value="Lào Cai">Lào Cai</option>
+                                                <option value="Tuyên Quang">Tuyên Quang</option>
+                                                <option value="Lạng Sơn">Lạng Sơn</option>
+                                                <option value="Bắc Kạn">Bắc Kạn</option>
+                                                <option value="Thái Nguyên">Thái Nguyên</option>
+                                                <option value="Yên Bái">Yên Bái</option>
+                                                <option value="Sơn La">Sơn La</option>
+                                                <option value="Phú Thọ">Phú Thọ</option>
+                                                <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                                                <option value="Quảng Ninh">Quảng Ninh</option>
+                                                <option value="Bắc Giang">Bắc Giang</option>
+                                                <option value="Bắc Ninh">Bắc Ninh</option>
+                                                <option value="Hải Dương">Hải Dương</option>
+                                                <option value="Hưng Yên">Hưng Yên</option>
+                                                <option value="Hòa Bình">Hòa Bình</option>
+                                                <option value="Hà Nam">Hà Nam</option>
+                                                <option value="Nam Định">Nam Định</option>
+                                                <option value="Thái Bình">Thái Bình</option>
+                                                <option value="Ninh Bình">Ninh Bình</option>
+                                                <option value="Thanh Hóa">Thanh Hóa</option>
+                                                <option value="Nghệ An">Nghệ An</option>
+                                                <option value="Cần Thơ">Cần Thơ</option>
+                                                <option value="Sóc Trăng">Sóc Trăng</option>
+                                                <option value="Bạc Liêu">Bạc Liêu</option>
+                                                <option value="Cà Mau">Cà Mau</option>
+                                                <option value="Kiên Giang">Kiên Giang</option>
+                                                <option value="Sapa">Sapa</option>
+                                                <option value="Cát Cát">Cát Cát</option>
+                                                <option value="Hàm Rồng">Hàm Rồng</option>
+                                                <option value="Fansipan">Fansipan</option>
+                                                <option value="Bà Rịa - Vũng Tàu">Bà Rịa -Vũng Tàu</option>
+                                                <option value="Hạ Long">Hạ Long</option>
+                                                <option value="Hòn Gai">Hòn Gai</option>
+                                                <option value="Vinh">Vinh</option>
+                                                <option value="Hà Tĩnh">Hà Tĩnh</option>
+                                                <option value="Quảng Bình">Quảng Bình</option>
+                                                <option value="Quảng Trị">Quảng Trị</option>
+                                                <option value="Thừa Thiên - Huế">Thừa Thiên -Huế</option>
+                                                <option value="Kon Tum">Kon Tum</option>
+                                                <option value="Gia Lai">Gia Lai</option>
+                                                <option value="Đắc Lắc">Đắc Lắc</option>
+                                                <option value="Đắc Nông">Đắc Nông</option>
+                                                <option value="Lâm Đồng">Lâm Đồng</option>
+                                                <option value="Bình Phước">Bình Phước</option>
+                                                <option value="Bình Dương">Bình Dương</option>
+                                                <option value="Đồng Nai">Đồng Nai</option>
+                                                <option value="Tây Ninh">Tây Ninh</option>
+                                                <option value="Long An">Long An</option>
+                                                <option value="Đồng Tháp">Đồng Tháp</option>
+                                                <option value="Tiền Giang">Tiền Giang</option>
+                                                <option value="An Giang">An Giang</option>
+                                                <option value="Bến Tre">Bến Tre</option>
+                                                <option value="Vĩnh Long">Vĩnh Long</option>
+                                                <option value="Trà Vinh">Trà Vinh</option>
+                                                <option value="Hậu Giang">Hậu Giang</option>
+                                                <option value="Quy Nhơn">Quy Nhơn</option>
+                                                <option value="Phú Quốc">Phú Quốc</option>
+                                                <option value="Nha Trang">Nha Trang</option>
+                                                <option value="Chùa Hương">Chùa Hương</option>
+                                                <option value="Khánh Hòa">Khánh Hòa</option>
+                                                <option value="Côn Đảo">Côn Đảo</option>
+                                                <option value="Đà Lạt">Đà Lạt</option>
+                                                <option value="Mộc Châu">Mộc Châu</option>
+                                                <option value="Phú Yên">Phú Yên</option>
+                                                <option value="Buôn Ma Thuột">Buôn Ma Thuột</option>
+                                                <option value="PLEIKU">PLEIKU</option>
+                                                <option value="Hội An">Hội An</option>
+                                                <option value="Mỹ Tho">Mỹ Tho</option>
+                                                <option value="Bình Thuận">Bình Thuận</option>
+                                                <option value="Quảng Ngãi">Quảng Ngãi</option>
+                                                <option value="Mũi Né">Mũi Né</option>
+                                                <option value="Điện Biên">Điện Biên</option>
+                                                <option value="Đồng Hới">Đồng Hới</option>
+                                                <option value="Vũng Chùa ">Vũng Chùa </option>
+                                                <option value="Tây Nguyên">Tây Nguyên</option>
+                                                <option value="Củ Chi">Củ Chi</option>
+                                            </select>
+
+                                        </div>
+                                        <div class="form__group">
+                                            <label for="address">Địa chỉ</label>
+                                            <input type="text" name="Address"
+                                                placeholder="Vui lòng nhập địa chỉ của bạn" class="form__control"
+                                                id="address">
+                                        </div>
+                                        <div class="form__group">
+                                            <label for="phone-number">
+                                                Số điện thoại<span class="text-danger">(*)</span>
+                                            </label>
+                                            <input type="number" name="Tel" placeholder="Vui lòng nhập số điện thoại"
+                                                class="form__control" id="phone-number" ng-model="Tel" required>
+                                            <span style="color: red;" ng-show="submitted && frBonus.Tel.$invalid">*Vui
+                                                lòng nhập số điện thoại</span>
+                                        </div>
+                                        <div class="form__group">
+                                            <label for="phone">Email<span class="text-danger">(*)</span></label>
+                                            <input type="email" name="Email" placeholder="Vui lòng nhập email"
+                                                class="form__control" id="email" ng-model="Email" required>
+                                            <span style="color: red;"
+                                                ng-show="submitted && frBonus.Email.$invalid">*Email
+                                                không đúng định dạng</span>
+                                        </div>
+                                        <div class="form__group">
+                                            <label for="re-content">Nội dung yêu cầu</label>
+                                            <textarea name="Request" placeholder="Vui lòng nhập yêu cầu của bạn"
+                                                class="form__control" id="re-content"></textarea>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="payform__bill-wp payform__item">
+                                    <div class="payform__bill">
+                                        <div class="payments payform__item">
+                                            <h3 class="payform-head">LOẠI HÌNH THANH TOÁN</h3>
+
+                                            <div class="payform-right">
+                                                <label for="payfull" class="form__radio">
+                                                    <span class="mr-4"> Thanh toán toàn bộ (100% giá trị tour)
+                                                    </span>
+                                                    <input type="radio" name="TypePayment" value="1" id="payfull">
+                                                    <span class="check-radio"></span>
+                                                </label>
+
+                                                <label for="paypercent" class="form__radio">
+
+                                                    <span class="mr-4">Đặt cọc trước (20% giá trị tour)
+                                                    </span>
+                                                    <input type="radio" name="TypePayment" value="1" id="paypercent">
+                                                    <span class="check-radio"></span>
+
+                                                </label>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="payment-methods payform__item">
+                                            <h3 class="payform-head">PHƯƠNG THỨC THANH TOÁN</h3>
+                                            <div class="payment-methods__detail">
+                                                <label class="form__radio">
+                                                    <span class=""> Thanh toán bằng chuyển khoản ngân hàng</span>
+                                                    <input type="radio" name="MethodPayment" id="bank-pay" value="0"
+                                                        checked>
+                                                    <span class="check-radio"></span>
+                                                </label>
+                                                <div class="bankpay-box">
+
+                                                    <p class="payform-note">
+                                                        Quý khách có thể nộp tiền mặt trực tiếp tại các phòng giao dịch
+                                                        ngân
+                                                        hàng,
+                                                        chuyển khoản qua cây ATM hoặc chuyển khoản qua internet banking,
+                                                        bank
+                                                        plus.
+                                                    </p>
+                                                    <div class="example-content">
+                                                        <p class="text-uppercase">
+                                                            <strong>MẪU NỘI DUNG CHUYỂN KHOẢN:</strong>
+                                                        </p>
+                                                        <p class="text-uppercase">"NGUYEN VAN A, nội dung chuyển khoản"
+                                                        </p>
+                                                        <p class="text-uppercase">Ví dụ : </p>
+                                                        <p class="text-uppercase">"NGUYEN VAN A, TT TIEN PHONG KHACH
+                                                            SAN"
+                                                        </p>
+                                                        <p class="text-uppercase">"NGUYEN VAN A, TT Cau Giay Hotel"</p>
+                                                    </div>
+                                                    <p class="payform-note">Tài khoản ngân hàng của Venus Travel:</p>
+                                                    <ul class="nav nav-banks">
+                                                        <li class="nav-item nav-bank__item">
+                                                            <a class="nav-link active" data-toggle="pill" href="#home">
+                                                                <img src="images/logo-mb.png" alt="">
+                                                            </a>
+                                                        </li>
+
+                                                    </ul>
+                                                    <!-- Tab panes -->
+                                                    <div class="tab-content tab-bank__content">
+                                                        <div class="tab-pane tab-bank__pane  active" id="home">
+                                                            <p>Ngân hàng TMCP Quân Đội - CN Hà Nội</p>
+                                                            <p>
+
+                                                            </p>
+                                                            <p>STK : 1450291097</p>
+                                                            <p>
+                                                                CTK : TRAN VAN DU
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <label class="form__radio no-online">
+                                                    <span class="">Thanh toán tại nhà</span>
+                                                    <input type="radio" name="MethodPayment" value="1" id="home-pay">
+                                                    <span class="check-radio"></span>
+                                                </label>
+
+                                                <label class="form__radio no-online">
+                                                    <span class="">Thanh toán trực tiếp tại Venus Travel</span>
+                                                    <input type="radio" name="MethodPayment" value="2" id="direct-pay">
+                                                    <span class="check-radio"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <p class="note-final">
+                                        * Khi Quý khách nhấn nút "Hoàn thành đặt tour" cũng đồng nghĩa là Quý
+                                        khách đã đồng ý với các
+                                        <span class="text-danger">điều khoản và điều kiện</span> về đặt dịch vụ trên
+                                        website
+                                        của
+                                        Venus Travel.
+                                    </p>
+                                    <div class="d-flex justify-content-center">
+                                        <input style="    width: 241px;
+                                height: 40px;
+                                border-radius: 3px;
+                                background-color: #0087ff;
+                                font-size: 14px;
+                                font-weight: 700;
+                                margin-bottom: 10px;
+                                color: #fff;" type="submit" class="text-uppercase pay-btn btn" ng-click="submitForm()"
+                                            value="ĐẶT NGAY">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+
+
+
+                <!-- end thanh toán --> <!-- end thanh toán --> <!-- end thanh toán -->
+                <!-- end thanh toán --><!-- end thanh toán --><!-- end thanh toán -->
+                <!-- end thanh toán --><!-- end thanh toán --><!-- end thanh toán -->
+                <!-- end thanh toán --><!-- end thanh toán --><!-- end thanh toán -->
+                <!-- end thanh toán --><!-- end thanh toán --><!-- end thanh toán -->
+                <div class="col-lg-3 col-md-12">
+                    <div class="pay-bar sticky-top" style="
+                            border-radius: 3px;
+                            overflow: hidden;
+                            border: 1px solid #ced4da;top: 42px;
+                            z-index: 100;">
+                        <h3 class="text-uppercase" style="padding: 10px 12px;
+                            text-align: center;
+                            background-color: #0f62ac;
+                            color: #fff;
+                            width: 100%;
+                            font-size: 16px;
+                            font-weight: 700;">Giỏ hàng của bạn</h3>
+                        <p class="nametour-bar" style="    margin: 12px 0 10px; padding-left: 10px;">
+                            <strong style="font-weight: bolder;">
+                                {{detailPro.title}}
+                            </strong>
+                        </p>
+                        <ul class="paybar__info border-bottom" style="padding: 10px;">
+
+                            <li>
+                                <i class="bi bi-geo-alt-fill text-primary-emphasis"></i>
+                                <span>Điểm khởi hành: <strong>{{detailPro.departure}}</strong></span>
+                            </li>
+                            <li>
+                                <i class="bi bi-clock-fill text-primary-emphasis"></i>
+                                <span>Thời gian: <strong>{{detailPro.duration}}</strong></span>
+                            </li>
+                            <li>
+                                <i class="bi bi-person-walking text-primary-emphasis"></i>
+                                <span>Phương tiện: <strong>{{detailPro.transport}}</strong> </span>
+                            </li>
+                        </ul>
+                        <div class="paybar-price" style="    font-weight: 600;
+                            padding: 0 10px;
+                            font-size: 18px;">
+                            <p style="font-weight: bold;">
+                                Tổng tiền<span class="text-danger ">
+                                    <input style="display: none" id="Price" type="number" name="Price" />
+                                    <span class="price-total" name="Price" data-format="currency">{{ totalPriceAll |
+                                        number }} </span> đ
+                                </span>
+                        </div>
+                        <div class="sale-code" style="margin-top: 10px;
+                            background-color: #0f62ac;
+                            padding: 8px 12px;
+                        ">
+                            <div class="sale-group">
+                                <label style="    text-transform: uppercase;
+                                    font-size: 14px;
+                                    font-weight: 700;
+                                    color: #fff;" for="salecode">MÃ GIẢM GIÁ</label>
+                                <input style="    height: 32px;
+                                    width: 58%;
+                                    padding: 5px 10px;
+                                    border-radius: 5px;" type="text" name="salecode" id="salecode">
+                            </div>
+                            <button class="btn-block apply-btn ">ÁP DỤNG</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        </div>
+
+
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"> </script>
+        <script nomodule src="https://unpkg .com/ionicons@7.1.0/dist/ionicons/ionicons.js"> </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+        <!-- <script>
+            var app = angular.module("myapp", []);
+            app.controller("myctrlgiohang", function ($scope) {
+                $scope.submitForm = function () {
+                    // Kiểm tra nếu form hợp lệ thì thực hiện các hành động cần thiết
+                    if ($scope.frBonus.$valid) {
+                        // Thực hiện các hành động khi form hợp lệ
+                        alert("Đặt thành công!");
+                    } else {
+                        // Nếu form không hợp lệ, đặt biến submitted thành true để hiển thị các thông báo lỗi
+                        $scope.submitted = true;
+                    }
+                };
+            });
+        </script> -->
+    </form>
+</body>

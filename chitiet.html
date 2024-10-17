@@ -1,0 +1,837 @@
+<title>Chi tiết HÀ NỘI – ĐÀ NẴNG – BÀ NÀ HILL – PHỐ CỔ HỘI AN</title>
+<link rel="stylesheet" href="css/csschitiet-hanoi-danang-bana-hill.css">
+<meta name="robots" content="noindex">
+<link rel="icon" href="images/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Thêm slick.css -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<!-- Thêm slick-theme.css -->
+<link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+<style>
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: rgb(180, 176, 176);
+        /* Thay đổi màu sắc thành màu đỏ */
+    }
+
+    /* Nếu bạn muốn thay đổi màu sắc của biểu tượng khi rê chuột vào, bạn có thể sử dụng */
+    .carousel-control-prev:hover .carousel-control-prev-icon,
+    .carousel-control-next:hover .carousel-control-next-icon {
+        background-color: rgb(243, 136, 78);
+        /* Thay đổi màu sắc thành màu xanh khi rê chuột vào */
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 30px;
+        height: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        background-color: rgba(233, 12, 12, 0.5);
+        font-size: 24px;
+        cursor: pointer;
+        color: rgb(24, 24, 247);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .carousel-control-prev {
+        left: 20px;
+        /* Nút điều hướng prev ở bên trái */
+    }
+
+    .carousel-control-next {
+        right: 20px;
+        /* Nút điều hướng next ở bên phải */
+    }
+</style>
+
+<body ng-controller="myCtrlChiTiet" ng-if="detailPro">
+    <div class="detail-tour__overview page-tour__overview">
+        <div class="container">
+            <div class="detail-tour__head page-tour__head">
+                <h3>{{detailPro.title}}</h3>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="pagetour__content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-12">
+                    <div class="pagetour__box">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12">
+                                <ul class="nav nav-pills pagetour__tab">
+                                    <li class="nav-item1 pagetour__tab-item ">
+                                        <a class="nav-link  pagetour__tab-link" data-toggle="pill" href=""
+                                            ng-click="showScenicTab1()">
+                                            <img class="nav-img" src="images/t-scenic.svg" alt="">
+                                            <img class="nav-img--hover" src="images/t-scenic-a.svg" alt=""> THẮNG CẢNH
+                                        </a>
+
+                                    </li>
+                                    <li class="nav-item1 pagetour__tab-item ">
+
+                                        <a class="nav-link pagetour__tab-link" data-toggle="pill" href=""
+                                            ng-click="showScenicTab2()">
+                                            <img class="nav-img" src="images/human.svg" alt="">
+                                            <img class="nav-img--hover" src="images/human-a.svg" alt=""> DU KHÁCH
+                                        </a>
+
+
+                                    </li>
+                                    <li class="nav-item1 pagetour__tab-item ">
+                                        <a class="nav-link pagetour__tab-link" data-toggle="pill" href=""
+                                            ng-click="showScenicTab3()">
+                                            <img class="nav-img" src="images/t-cuisine.svg" alt="">
+                                            <img class="nav-img--hover" src="images/t-cuisine-a.svg" alt=""> ẨM THỰC
+                                        </a>
+
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="col-lg-9 col-md-12">
+                                <div class="tab-content pagetour__tab-content">
+                                    <div class="tab-pane active pagetour-pane " id="menu1">
+                                        <div class="pagetour__slide">
+                                            <div id="carouselExampleAutoplaying" class="carousel slide"
+                                                data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item" ng-repeat="img in detailPro.image"
+                                                        ng-class="{'active': $index === 0}">
+                                                        <img style="width: 600px;
+                                                        height: 450px;" ng-src="{{img}}" class="d-block w-100" alt="...">
+                                                    </div>
+                                                </div>
+
+                                                <button class="carousel-control-prev" type="button"
+                                                    data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                    data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <span class="arow one d-none d-lg-block"></span>
+                                    </div>
+                                    <div class="tab-pane pagetour-pane " id="menu2">
+                                        <div class="pagetour__slide">
+                                            <div id="carouselExampleAutoplaying2" class="carousel slide"
+                                                data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item"
+                                                            ng-repeat="img in detailPro.image_dukhach"
+                                                            ng-class="{'active': $index === 0}">
+                                                            <img style="width: 600px;
+                                                            height: 450px;" ng-src="{{img}}" class="d-block w-100" alt="...">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button"
+                                                    data-bs-target="#carouselExampleAutoplaying2" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                    data-bs-target="#carouselExampleAutoplaying2" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <span class="arow two d-none d-lg-block"></span>
+                                    </div>
+                                    <div class="tab-pane pagetour-pane " id="menu3">
+                                        <div class="pagetour__slide">
+                                            <div id="carouselExampleAutoplaying3" class="carousel slide"
+                                                data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="carousel-item" ng-repeat="img in detailPro.image_amthuc"
+                                                        ng-class="{'active': $index === 0}">
+                                                        <img style="width: 600px;
+                                                        height: 450px;" ng-src="{{img}}" class="d-block w-100" alt="...">
+                                                    </div>
+                                                </div>
+                                                <button class="carousel-control-prev" type="button"
+                                                    data-bs-target="#carouselExampleAutoplaying3" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                    data-bs-target="#carouselExampleAutoplaying3" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <span class="arow three d-none d-lg-block"></span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagetour__box ">
+                        <div class="pagetour__info">
+                            <h3 class="pagetour__info-head">Thông tin tour:</h3>
+                            <div class="pagetour__info-detail">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <ul class="pagetour__list-info">
+
+                                            <li class="pagetour__info-item">
+                                                <i style="margin-right: 5px;"
+                                                    class="bi bi-geo-alt-fill text-primary-emphasis"></i>
+                                                <div class="info__item--detail">
+                                                    <p> Điểm khởi hành:<strong> {{detailPro.departure}}</strong></p>
+                                                </div>
+                                            </li>
+                                            <li class="pagetour__info-item">
+                                                <i style="margin-right: 5px;"
+                                                    class="bi bi-geo-alt-fill text-primary-emphasis"></i>
+                                                <div class="info__item--detail">
+                                                    <p> Điểm đến:<strong> Đà Nẵng </strong></p>
+                                                </div>
+                                            </li>
+                                            <li class="pagetour__info-item">
+                                                <i class="bi bi-calendar2-check-fill text-primary-emphasis"></i>
+                                                <div class="info__item--detail">
+                                                    <p>Ngày khởi hành:<strong> {{detailPro.date}}</strong></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <ul class="pagetour__list-info">
+                                            <li class="pagetour__info-item">
+                                                <i class="bi bi-clock-fill text-primary-emphasis"></i>
+                                                <div class="info__item--detail">
+                                                    <p>
+                                                        Thời gian:
+                                                        <strong> {{detailPro.duration}}</strong>
+                                                    </p>
+                                                </div>
+                                            </li>
+
+                                            <li class="pagetour__info-item">
+                                                <i class="bi bi-person-walking text-primary-emphasis"></i>
+                                                <div class="info__item--detail">
+                                                    <p> Phương tiện:<strong> {{detailPro.transport}}</strong></p>
+                                                </div>
+                                            </li>
+
+                                            <li class="pagetour__info-item">
+                                                <div class="list-tour__rate page-tour__rate flex-column flex-md-row">
+                                                    <div class="facebook-btn mb-2 mb-md-0">
+                                                        <div class="fb-like"
+                                                            data-href="http://127.0.0.1:5500/ASM/chitiet-hanoi-danang-bana-hill.html"
+                                                            data-width="" data-layout="" data-action="" data-size=""
+                                                            data-share="true"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagetour__box">
+                        <ul class="nav nav-pills pagetour__tab tab__bottom">
+                            <li class="nav-item1 pagetour__tab-item tab-item__bottom mx-0 mx-lg-3">
+                                <a class="nav-link  pagetour__tab-link pagetour__tab-link1 tab-link__bottom"
+                                    data-toggle="pill" href="" ng-click="showScenicTab4()">
+                                    LỊCH TRÌNH CHI TIẾT
+
+                                </a>
+                            </li>
+                            <li class="nav-item1 pagetour__tab-item tab-item__bottom mx-0 mx-lg-3">
+                                <a class="nav-link pagetour__tab-link pagetour__tab-link1 tab-link__bottom"
+                                    data-toggle="pill" href="" ng-click="showScenicTab5()">
+                                    GIÁ
+
+                                </a>
+                            </li>
+                            <li class="nav-item1 pagetour__tab-item tab-item__bottom mx-0 mx-lg-3">
+                                <a class="nav-link  pagetour__tab-link pagetour__tab-link1 tab-link__bottom"
+                                    data-toggle="pill" href="" ng-click="showScenicTab6()">
+                                    ĐÁNH GIÁ
+
+                                </a>
+
+                            </li>
+                        </ul>
+                        <div class="tab-content pagetour__tab-content">
+                            <div class="tab-pane tab-pane__bottom active" id="menu4">
+                                <div class="accordion" id="accordionExample" ng-repeat="day in detailPro.lich_trinh">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapse{{day.ngay}}"
+                                                ng-attr-aria-expanded="{{ $index === 0 ? 'true' : 'false' }}"
+                                                aria-controls="collapse{{day.ngay}}">
+                                                <div class="titDay">
+                                                    <span class="date-title"><span> NGÀY {{day.ngay}} |
+                                                        </span>{{day.tieu_de_lichtrinh}}</span>
+
+                                                </div>
+                                            </button>
+                                        </h2>
+                                        <div id="collapse{{day.ngay}}" class="accordion-collapse collapse"
+                                            ng-class="{show: $index === 0}" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body">
+                                                <p><strong>Sáng: </strong>{{day.chi_tiet_lichtrinh.sang}}<br>
+                                                    <strong>Trưa: </strong>{{day.chi_tiet_lichtrinh.trua}}<br>
+                                                    <strong>Chiều: </strong> {{day.chi_tiet_lichtrinh.chieu}}<br>
+                                                    <strong>Tối: </strong>{{day.chi_tiet_lichtrinh.toi}}
+                                                </p>
+                                                <img style="width: 700px;
+                                                height: 400px;" class="d-block mx-auto "
+                                                    ng-src="{{day.chi_tiet_lichtrinh.hinh_anh}}" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane tab-pane__bottom" id="menu5">
+                                <table border="1" cellspacing="0" style="width:100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50%; text-align: center; border: 1px solid black;">CHI PHÍ
+                                                BAO GỒM</th>
+                                            <th style="width: 50%; text-align: center; border: 1px solid black;">KHÔNG
+                                                BAO GỒM</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width:50%; vertical-align: top; border: 1px solid black;">
+                                                <ul style="list-style-type:circle; padding-left: 30px;">
+                                                    <li>Xe du lịch đời mới hiện đại đón tiễn đoàn Yên Bái – Nội Bài – Hà
+                                                        Nội.</li>
+                                                    <li>Xe du lịch Univer 45C đời mới hiện đại phục vụ đoàn theo chương
+                                                        trình tour.</li>
+                                                    <li>Khách sạn tiêu chuẩn 03 sao bên bờ biển Mỹ Khê, nghỉ 02 khách /
+                                                        Phòng (Nếu lẻ nam hoặc nữ ngủ phòng 3)</li>
+                                                    <li>Ăn chính:</li>
+                                                </ul>
+                                                <p style="padding-left: 40px;">
+                                                    + 06 Bữa chính – 150.000 vnd/1 Suất<br />
+                                                    + 01 Bữa Buffet tại Bà Nà Hills – 225.000 Vnđ / Suất<br />
+                                                    + 03 Bữa sáng Buffet.
+                                                </p>
+                                                <ul style="list-style-type:circle; padding-left: 30px;">
+                                                    <li>Vé vào cửa và thăm quan các điểm theo lịch trình</li>
+                                                    <li>Hướng dẫn viên: nhiệt tình, chu đáo, kinh nghiệm.</li>
+                                                    <li>Bảo hiểm du lịch (Mức đền bù tối đa 50.000.000 VNĐ/ 1 người/ 1
+                                                        vụ)</li>
+                                                    <li>Nước uống: 500ml/ ngày / khách.</li>
+                                                    <li>Khăn Lạnh + y tế dự phòng: Bông, băng y tế, thuốc say xe.</li>
+                                                </ul>
+                                            </td>
+                                            <td style="width:50%; vertical-align: top; border: 1px solid black;">
+                                                <ul style=" list-style-type:circle; padding-left: 30px; ">
+                                                    <li>Ngủ phòng đơn.</li>
+                                                    <li>Vé máy bay Hà Nội – Đà Nẵng – Hà Nội.</li>
+                                                    <li>Vé cáp treo Bà Nà 750.000 Vnđ / Vé</li>
+                                                    <li>Điện thoại, giặt là và các chi phí khác ngoài chương trình.</li>
+                                                    <li>Hóa đơn VAT</li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                            <div class="tab-pane tab-pane__bottom " id="menu6">
+
+
+                                <div class="rating-tab">
+
+                                    <div class="rating-block">
+                                        <h3 class="tab__head">Đánh giá chung</h3>
+                                        <h2 class="bold padding-bottom-7">0 <small>/ 5</small></h2>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                        <i class="bi bi-star-fill"></i>
+                                    </div>
+                                    <div class="service-rating">
+                                        <h3 class="tab__head">
+                                            Đánh giá các dịch vụ:
+                                        </h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p>
+                                                    Hướng dẫn viên:
+                                                <div class="pull-left" style="width:180px;">
+                                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                                        <div class="progress-bar progress-bar-info" role="progressbar"
+                                                            aria-valuenow="3" aria-valuemin="0" aria-valuemax="5">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right" style="margin-left:10px;">
+                                                    0
+                                                </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>
+                                                    Khách sạn:
+                                                <div class="pull-left" style="width:180px;">
+                                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                                        <div class="progress-bar progress-bar-danger" role="progressbar"
+                                                            aria-valuenow="1" aria-valuemin="0" aria-valuemax="5">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right" style="margin-left:10px;">
+                                                    0
+                                                </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>
+                                                    Ẩm thực:
+                                                <div class="pull-left" style="width:180px;">
+                                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                                        <div class="progress-bar progress-bar-primary"
+                                                            role="progressbar" aria-valuenow="4" aria-valuemin="0"
+                                                            aria-valuemax="5">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right" style="margin-left:10px;">
+                                                    0
+                                                </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>
+                                                    Lịch trình:
+                                                <div class="pull-left" style="width:180px;">
+                                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                                        <div class="progress-bar progress-bar-success"
+                                                            role="progressbar" aria-valuenow="5" aria-valuemin="0"
+                                                            aria-valuemax="5">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right" style="margin-left:10px;">
+                                                    0
+                                                </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>
+                                                    Hoạt động:
+                                                <div class="pull-left" style="width:180px;">
+                                                    <div class="progress" style="height:9px; margin:8px 0;">
+                                                        <div class="progress-bar progress-bar-success"
+                                                            role="progressbar" aria-valuenow="5" aria-valuemin="0"
+                                                            aria-valuemax="5">
+                                                            <span class="sr-only"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="pull-right" style="margin-left:10px;">
+                                                    0
+                                                </div>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="customer-rating">
+                                        <h3 class="tab__head">
+                                            Đánh giá của khách hàng:
+                                        </h3>
+                                        <div class="rating-table">
+                                            <div class="item">
+                                                <strong>Tuyệt vời </strong><span>0</span>
+                                            </div>
+                                            <div class="item">
+                                                <strong>Tốt </strong><span>0</span>
+                                            </div>
+                                            <div class="item">
+                                                <strong>Trung bình </strong><span>0</span>
+                                            </div>
+                                            <div class="item">
+                                                <strong>Kém </strong><span>0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="your-rating table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>ĐÁNH GIÁ CỦA BẠN VỀ TOUR DU LỊCH NÀY</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <p>Những đánh giá của bạn sẽ thực sự hữu ích cho những người đang
+                                                        chuẩn bị đi du lịch. Cảm ơn bạn đã đánh giá!</p>
+                                                    <form action="/Review-tour" method="post"
+                                                        enctype="multipart/form-data" id="frmReview">
+                                                        <div class="row pt-4 flex-column-reverse flex-md-row">
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Giới tính: (*)</label>
+                                                                    <select name="Gender" class="form-control"
+                                                                        id="gender">
+                                                                        <option value="True">Mr.</option>
+                                                                        <option value="False">Ms.</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="name">Họ và tên<span
+                                                                            class="text-danger">*</span>:</label>
+                                                                    <input type="text" name="FullName" id="fullname"
+                                                                        class="form-control"
+                                                                        placeholder="Nhập họ và tên">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="email">Email <span
+                                                                            class="text-danger">*</span>:</label>
+                                                                    <input type="email" name="Email"
+                                                                        class="form-control"
+                                                                        placeholder="Nhập email của bạn" id="email">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="Title">Tiêu đề bài đánh giá <span
+                                                                            class="text-danger">*</span>:</label>
+                                                                    <input type="text" name="Title" class="form-control"
+                                                                        placeholder="Tiều đề đánh giá" id="head-rate">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Bạn đã sử dụng dịch vụ
+                                                                        của chúng tôi?<span
+                                                                            class="text-danger">*</span>: </label>
+                                                                    <select name="UseService" class="form-control">
+                                                                        <option value="True">Đã sử dụng</option>
+                                                                        <option value="False">Chưa từng</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Loại hình du lịch của
+                                                                        bạn: <span class="text-danger"">*</span></label>
+                                                                    <select name=" KindOfTrip" class="form-control">
+                                                                            <option value=""> -- Chọn loại hình du lịch
+                                                                                -- </option>
+                                                                            <option value="Enterprise">Doanh nghiệp
+                                                                            </option>
+                                                                            <option value="Couple">Cặp đôi</option>
+                                                                            <option value="Family">Gia đình</option>
+                                                                            <option value="Friend">Bạn bè</option>
+                                                                            <option value="Alone">Một mình</option>
+                                                                            </select>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Quốc gia: <span
+                                                                            class="text-danger">*</span></label>
+                                                                    <select id="Country" name="Country"
+                                                                        class="form-control">
+                                                                        <option value=""> -- Chọn quốc gia của bạn --
+                                                                        </option>
+                                                                        <option value="Việt Nam" selected="selected">
+                                                                            Việt Nam</option>
+                                                                        <option value="Thái Lan">Thái Lan</option>
+                                                                        <option value="Campuchia">Campuchia</option>
+                                                                        <option value="Lào">Lào</option>
+                                                                        <option value="Singapo">Singapo</option>
+                                                                        <option value="Malaysia">Malaysia</option>
+                                                                        <option value="Philippin">Philippin</option>
+
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Địa chỉ: <span
+                                                                            class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="Address" placeholder="Địa chỉ" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="Content">Nhập phần đánh giá của bạn
+                                                                        <span class="text-danger">*</span>:</label>
+                                                                    <textarea name="Content" id="rate-text" cols=""
+                                                                        rows=""
+                                                                        placeholder="Đánh giá của bạn"></textarea>
+                                                                </div>
+                                                                <div class="g-recaptcha" data-sitekey="your_site_key">
+                                                                </div>
+                                                                <button type="submit"
+                                                                    class="btn btn-block btn-signup">Gửi đánh
+                                                                    giá</button>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="your-rate__right">
+
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Đánh giá chung:
+                                                                            <span class="text-danger">*</span></label>
+                                                                        <select name="Point" id="rate"
+                                                                            class="form-control">
+                                                                            <option value=""> -- Chọn điểm đánh giá --
+                                                                            </option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-2 col-xs-5" id="notifiRatePoint">
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <input type="hidden" name="ObjID"
+                                                                            value='1116' />
+                                                                        <input type="hidden" name="MenuID"
+                                                                            value='2440' />
+                                                                    </div>
+
+                                                                    <div class="hidden-xs"></div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Hành trình: <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <select class="rating form-control"
+                                                                            id="ItineraryPoint" name="ItineraryPoint">
+                                                                            <option value=""> -- Chọn điểm đánh giá --
+                                                                            </option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div id="notifiItineraryPoint"></div>
+                                                                    <div class="col-md-4">
+                                                                    </div>
+                                                                    </p>
+                                                                    <p>
+                                                                    <div class="hidden-xs"></div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Ẩm thực: <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <select class="rating form-control"
+                                                                            id="FoodDrinkPoint" name="FoodDrinkPoint">
+                                                                            <option value=""> -- Chọn điểm đánh giá --
+                                                                            </option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div id="notifiFoodDrinkPoint"></div>
+                                                                    <div class="col-md-4">
+                                                                    </div>
+                                                                    </p>
+                                                                    <p>
+                                                                    <div class="hidden-xs"></div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Hướng dẫn viên:
+                                                                            <span class="text-danger">*</span></label>
+                                                                        <select class="rating form-control"
+                                                                            name="GuidePoint" id="GuidePoint">
+                                                                            <option value=""> -- Chọn điểm đánh giá --
+                                                                            </option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div id="notifiGuidePoint"></div>
+                                                                    <div class="col-md-4">
+                                                                    </div>
+                                                                    </p>
+                                                                    <p>
+                                                                    <div class="hidden-xs"></div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Hoạt động: <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <select class="rating form-control"
+                                                                            id="ActivityPoint" name="ActivityPoint">
+                                                                            <option value=""> -- Chọn điểm đánh giá --
+                                                                            </option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div id="notifiActivityPoint"></div>
+                                                                    <div class="col-md-4">
+                                                                    </div>
+                                                                    </p>
+                                                                    <p>
+                                                                    <div class="hidden-xs"></div>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Khách sạn: <span
+                                                                                class="text-danger">*</span></label>
+                                                                        <select class="rating form-control"
+                                                                            id="AccomodationsPoint"
+                                                                            name="AccomodationsPoint">
+                                                                            <option value=""> -- Chọn điểm đánh giá --
+                                                                            </option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div id="notifiAccomodationsPoint"></div>
+                                                                    <div class="col-md-4">
+                                                                    </div>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <script>// Lấy tất cả các liên kết trong class "pagetour__tab-link"
+                        var tabLinks1 = document.querySelectorAll('.pagetour__tab-link1');
+
+                        // Lặp qua từng liên kết
+                        tabLinks1.forEach(function (tabLink1) {
+                            // Thêm sự kiện click cho mỗi liên kết
+                            tabLink1.addEventListener('click', function (event) {
+                                // Ngăn chặn hành vi mặc định của liên kết
+                                event.preventDefault();
+                                // Lấy href của liên kết được nhấn
+                                var href1 = this.getAttribute('href');
+                                // Loại bỏ lớp 'active' từ tất cả các tab-pane
+                                document.querySelectorAll('.tab-pane__bottom').forEach(function (tabPane1) {
+                                    tabPane1.classList.remove('active', 'show');
+                                });
+                                // Hiển thị tab-pane tương ứng với liên kết được nhấn
+                                document.querySelector(href1).classList.add('active', 'show');
+                            });
+                        });
+                    </script>
+                    <!-- fb-coment -->
+                    <!-- fb-coment -->
+                    <!-- fb-coment -->
+                    <div class="pagetour__box">
+                        <div class="fb-comments"
+                            data-href="http://127.0.0.1:5500/ASM/chitiet-hanoi-danang-bana-hill.html" data-width="100%"
+                            data-numposts="3"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <div class="d-md-flex d-lg-block page-tour__right sticky-top" style=" z-index: 100;">
+                        <div class="pagetour__info-sort">
+                            <div class="price-min">
+                                <span>Giá chỉ</span>
+                                <p>{{detailPro.price | number}} Đ</p>
+                            </div>
+                            <a href="#!/giohang/{{detailPro.id}}" class="btn Reservations">ĐẶT TOUR</a>
+                            <div class="signup-advisory" data-toggle="modal" data-target="#signup-advisory">
+                                <p>Đăng kí tư vấn</p>
+                                <span>hotline : 0358768117</span>
+                            </div>
+                        </div>
+                        <div class="pagetour__info-contact">
+                            <p class="text-center headline">MỌI THẮC MẮC XIN VUI LÒNG LIÊN HỆ</p>
+                            <div class="d-flex align-items-center mb-3"><i style="margin-right: 5px;"
+                                    class="bi bi-telephone-forward-fill text-primary"></i><span>Hotline:</span><a
+                                    href="">0358768117</a></div>
+                            <div class="d-flex align-items-center"><i style="margin-right: 5px;"
+                                    class="bi bi-envelope-arrow-down-fill text-primary"></i><span>Email:</span><a
+                                    href="">tranvandu19971029@gmail.com</a></div>
+                            <h3 class="headline text-center mt-4">HOẶC ĐỂ LẠI THÔNG TIN</h3>
+                            <form action="/" onsubmit="return validateForm()" method="post" class="leave-info"
+                                id="leave-info">
+                                <div class="form-group">
+                                    <label for="name">Họ và tên</label>
+                                    <input type="text" name="name" class="form-control" placeholder="Nhập họ và tên"
+                                        id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email hoặc Số điện thoại</label>
+                                    <input type="text" name="email-phone" class="form-control"
+                                        placeholder="Nhập email của bạn" id="">
+                                </div>
+                                <!-- <div class="g-recaptcha" data-sitekey="your_site_key"></div> -->
+                                <button type="submit" class="btn btn-block btn-signup"><strong>GỬI</strong></button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0&appId=795056528939617"
+        nonce="5eTsCBbq"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lấy tất cả các phần tử li có class 'dropdown' trong thanh điều hướng
+            const dropdownItems = document.querySelectorAll(".dropdown");
+
+            // Duyệt qua từng phần tử và thêm sự kiện mouseover và mouseout
+            dropdownItems.forEach(function (dropdownItem) {
+                dropdownItem.addEventListener("mouseover", function () {
+                    // Thêm lớp 'show' để hiển thị menu dropdown
+                    this.querySelector(".dropdown-menu").classList.add("show");
+                });
+
+                dropdownItem.addEventListener("mouseout", function () {
+                    // Loại bỏ lớp 'show' để ẩn menu dropdown
+                    this.querySelector(".dropdown-menu").classList.remove("show");
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>

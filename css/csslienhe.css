@@ -1,0 +1,165 @@
+.main {
+    margin-bottom: 0px;
+}
+
+.contact {
+    /* Tạo lớp màu xanh đậm trên nền ảnh */
+    background: linear-gradient(rgba(25, 127, 244, 0.5), rgba(34, 129, 238, 0.6)), url(images/top-10-things-to-do-in-dubai-with-kids-and-family.jpg);
+    /* Thiết lập các thuộc tính khác */
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+    background-position: center;
+    background-size: cover;
+    padding: 40px 0;
+    background-attachment: fixed;
+}
+
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+
+.contact__left h2:last-child {
+    font-size: 24px;
+    text-align: justify;
+    color: #fff;
+    margin-top: 30px;
+}
+
+.contact__left--logo h2 {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.contact__left p {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.contact__left p img {
+    height: 16px;
+    width: 16px;
+    margin-right: 6px;
+    float: left;
+}
+
+.contact__left a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.contact__right {
+    background-color: #fff;
+    border-radius: 3px;
+}
+
+.contact__right h1 {
+    font-size: 24px;
+    text-align: center;
+    color: #0f62ac;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+input,
+button,
+textarea,
+select {
+    font-size: 1.6rem;
+    font-weight: 400;
+    outline: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.contactform__select {
+    height: 36px;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    padding-left: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+}
+
+.contact__right--list label {
+    font-size: 14px;
+    color: #000;
+    margin: 14px 0 5px;
+}
+
+.contact__right--list span {
+    color: red;
+}
+
+.contact__right--list input {
+    height: 36px;
+    width: 100%;
+    padding-left: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.contact__right--list textarea {
+    width: 100%;
+    height: 72px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: #fff;
+    margin-bottom: 21px;
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.contact__right--list textarea,
+.contact__right--list input[type="text"]::placeholder {
+    font-style: italic;
+    /* In nghiêng chữ trong placeholder */
+    font-size: 13px;
+    /* Kích thước chữ trong placeholder */
+}
+
+.contact__right button {
+    width: 100%;
+    height: 36px;
+    border-radius: 3px;
+    background-color: #0087ff;
+    border: none;
+    margin: 20px 0 22px;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.contact__right button:hover {
+    background-color: #0164bc;
+
+}

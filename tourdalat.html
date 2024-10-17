@@ -1,0 +1,479 @@
+<title>Tour Đà Lạt</title>
+<link rel="stylesheet" href="css/csstourhanoi.css">
+<meta name="robots" content="noindex">
+<link rel="icon" href="images/favicon.ico">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+<style>
+    .card {
+        margin-top: 5px;
+        /* Tương đương với pl-3 */
+    }
+
+    .list-tour__img {
+        position: relative;
+        color: #fff;
+    }
+
+    .list-tour__img a {
+        display: block;
+        overflow: hidden;
+    }
+
+    .list-tour__img a img {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+    .list-tour__img a img:hover {
+        -webkit-transform: scale(1.3);
+        transform: scale(1.3);
+    }
+
+    .hover06 {
+        position: relative;
+        color: #fff;
+    }
+
+    .hover06 a {
+        display: block;
+        overflow: hidden;
+    }
+
+    .hover06 a img {
+        -webkit-transform: rotate(15deg) scale(1.4);
+        transform: rotate(15deg) scale(1.4);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+    .hover06 a img:hover {
+        -webkit-transform: rotate(0) scale(1);
+        transform: rotate(0) scale(1);
+    }
+
+    .time-slot {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        color: #fff;
+        font-size: 1rem;
+        width: calc(100% - 2rem);
+        display: flex;
+        justify-content: space-between;
+        text-shadow: 0px 0px 5px #333;
+    }
+
+    .list-tour__sale {
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+
+    .list-tour__sale img {
+        height: 60px;
+        aspect-ratio: auto 64 / 60;
+        width: 64px;
+    }
+
+    .sale-detail {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: 700;
+        color: #fff;
+    }
+
+    .sale-text {
+        margin-bottom: 0;
+        margin-top: 2px;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+    }
+
+    .sale-price {
+        font-size: 1.2rem;
+        margin-top: -9px;
+        margin-left: 7px;
+    }
+
+    .unit {
+        font-size: 1rem;
+    }
+
+    .list-tour__left {
+        float: left;
+        width: 60%;
+        /* Chiều rộng của phần tử bên trái */
+        color: #484848;
+    }
+
+
+    .list-tour__right {
+        float: right;
+        /* Đẩy phần tử bên phải sang phải */
+        width: 40%;
+        /* Chiều rộng của phần tử bên phải */
+        text-align: right;
+        /* Căn chỉnh văn bản sang phải */
+        margin: 0;
+        padding: 0;
+    }
+
+    .price-title,
+    .price {
+        margin: 0;
+        padding: 0;
+    }
+
+    .price-title {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 0;
+    }
+
+    span.price {
+        color: #c8781d;
+    }
+
+    .btn--placeholder {
+        display: block;
+        padding: 3px 10px;
+        width: 100%;
+        background-color: #ff9800;
+        color: #fff;
+    }
+
+    .btn {
+        display: inline-block;
+        border: 1px solid;
+        border-radius: 3px;
+        padding: 5px 10px;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        background-color: #c07403;
+        color: #fff;
+    }
+
+    .box-content {
+
+        margin-bottom: 25px;
+    }
+
+    .img-fluid {
+        width: 100%;
+        height: 200px;
+    }
+
+    /* Ẩn carousel trên màn hình lớn */
+    @media (min-width: 768px) {
+        .mobile-carousel {
+            display: none;
+        }
+    }
+
+    /* Hiển thị carousel trên thiết bị di động */
+    @media (max-width: 767px) {
+        .mobile-carousel {
+            display: block;
+        }
+    }
+
+    .img-fluid {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+    .img-fluid:hover {
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    .slick-slide {
+        text-align: center;
+    }
+
+    .slick-list {
+        margin: 0 auto;
+        /* Căn giữa carousel */
+    }
+</style>
+
+<body ng-controller="myCtrlTourHaNoi">
+    <div class="list-tour__overview page-tour__overview">
+        <div class="container">
+            <div class="list-tour__head page-tour__head">
+                <h3>TOUR DU LỊCH ĐÀ LẠT</h3>
+            </div>
+            <div class="list-tour__rate page-tour__rate flex-column flex-md-row">
+
+                <div class="rate-star d-flex">
+                    <p class="mt-3">Đánh giá:</p>
+                    <div class="star_wrap ms-2 me-2">
+
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                    </div>
+                    <p class="mt-3"><strong>5/5</strong> trong <strong>5</strong> đánh giá</p>
+
+
+                    <!-- <span class="ratestar" style="color: rgb(252, 215, 3);">
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                        <i class="bi bi-star-fill"></i>
+                    </span> -->
+                </div>
+            </div>
+            <div class="overview__content">
+                <p class="overview__text">
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <div class="hot-tour box">
+        <div class="container mt-5">
+            <div class="tab-search">
+                <div class="tab-search__left lt__box-left">
+                    <div class="box__head lt__sub-head">
+                        <h4 class="no-border" style="border-bottom: 1px solid #d10a0a; cursor: pointer;"><strong
+                                style="color: rgb(4, 4, 139);">TOUR DU LỊCH ĐÀ LẠT </strong></h4>
+                    </div>
+                </div>
+                <div class="tab-search__right">
+                    <span class="navtab-text">Sắp xếp theo : </span>
+                    <ul class="nav nav-pills navtab-combo">
+                        <li class="nav-item nav-item-combo">
+                            <a class="nav-link1 nav-link-combo" style="text-decoration: none; color:rgb(1, 1, 169);"
+                                data-toggle="pill" href="" ng-click="sortType = 'price'; sortReverse = false;">
+                                <i style="margin-right: 5px;" class="bi bi-arrow-up-square"></i>GIÁ TĂNG DẦN
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item-combo">
+                            <a class="nav-link1 nav-link-combo" style="text-decoration: none; color:rgb(1, 1, 169);"
+                                data-toggle="pill" href="" ng-click="sortType = 'price'; sortReverse = true;">
+                                <i style="margin-right: 5px;" class="bi bi-arrow-down-square"></i>GIÁ GIẢM DẦN
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content box__content">
+            <div class="tab-pane active" id="">
+                <div class="row">
+                    <div class="card col-sm-6 col-md-4 col-lg-3"
+                        ng-repeat="p in products | filter: { title: 'ĐÀ LẠT' }| orderBy:sortType:sortReverse">
+                        <div class="list-tour__img position-relative">
+                            <a href="#!/chitiet/{{p.id}}"><img style="height: 250px;" ng-src="{{p.image[0]}}"
+                                    class="card-img-top" alt="..."></a>
+                            <div class="time-slot position-absolute">
+                                <span class="list-tour__time">
+                                    <i class="bi bi-alarm"></i>{{p.duration}}
+                                </span>
+                                <span class="list-tour__slot">
+                                    <i class="fas fa-user"></i>{{p.slots}}
+                                </span>
+                            </div>
+                            <div class="list-tour__sale position-absolute">
+                                <img src="{{p.saleImage}}" alt="">
+                                <div class="sale-detail">
+                                    <p class="sale-text">SALE</p>
+                                    <span class="sale-price">{{p.salePercent}}<span class="unit">%</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="#!/chitiet/{{p.id}}" class="text-decoration-none">{{p.title}}</a>
+                            </h6>
+                            <div class="list-tour__left">
+                                <div class="list-tour__transport">
+                                    <i class="bi bi-person-walking"></i>
+                                    <span class="transport">{{p.transport}}</span>
+                                </div>
+                                <div class="list-tour__date">
+                                    <i class="bi bi-calendar-plus-fill"></i>{{p.date}}
+                                </div>
+                            </div>
+                            <div class="list-tour__right">
+                                <div class="list-tour__price">
+                                    <p class="price-title">Giá Từ</p>
+                                    <span class="price">{{p.price | number}} Đ</span>
+                                </div>
+                                <a href="#!/giohang/{{p.id}}" class="btn btn--placeholder float-end">ĐẶT TOUR</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-center">
+                        <a href="#" class="btn btn--viewmore">Xem Thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- tour khác 8 tour --> <!-- tour khác 8 tour --> <!-- tour khác 8 tour --> <!-- tour khác 8 tour -->
+    <!-- tour khác 8 tour -->
+    <!-- tour khác 8 tour --> <!-- tour khác 8 tour --> <!-- tour khác 8 tour --> <!-- tour khác 8 tour -->
+    <!-- tour khác 8 tour -->
+    <!-- tour khác 8 tour --> <!-- tour khác 8 tour --> <!-- tour khác 8 tour --> <!-- tour khác 8 tour -->
+    <!-- tour khác 8 tour -->
+
+    <div class="hot-tour box">
+        <div class="container mt-5">
+            <div class="tab-search">
+                <div class="tab-search__left lt__box-left">
+                    <div class="box__head lt__sub-head">
+                        <h4 class="no-border" style="border-bottom: 1px solid #d10a0a; cursor: pointer;"><strong
+                                style="color: rgb(4, 4, 139);">TOUR DU LỊCH THAM KHẢO KHÁC </strong></h4>
+                    </div>
+                </div>
+                <div class="tab-search__right">
+                    <span class="navtab-text">Sắp xếp theo : </span>
+                    <ul class="nav nav-pills navtab-combo">
+                        <li class="nav-item nav-item-combo">
+                            <a class="nav-link1 nav-link-combo" style="text-decoration: none; color:rgb(1, 1, 169);"
+                                data-toggle="pill" href="" ng-click="sortType2 = 'price'; sortReverse2 = false;">
+                                <i style="margin-right: 5px;" class="bi bi-arrow-up-square"></i>GIÁ TĂNG DẦN
+                            </a>
+                        </li>
+                        <li class="nav-item nav-item-combo">
+                            <a class="nav-link1 nav-link-combo" style="text-decoration: none; color:rgb(1, 1, 169);"
+                                data-toggle="pill" href="" ng-click="sortType2 = 'price'; sortReverse2 = true;">
+                                <i style="margin-right: 5px;" class="bi bi-arrow-down-square"></i>GIÁ GIẢM DẦN
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content box__content">
+            <div class="tab-pane active" id="">
+                <div class="row">
+                    <div class="card col-sm-6 col-md-4 col-lg-3"
+                        ng-repeat="p in products | filter: { title: '!ĐÀ LẠT' } | orderBy:sortType2:sortReverse2">
+                        <div class="list-tour__img position-relative">
+                            <a href="#!/chitiet/{{p.id}}"><img style="height: 250px;" ng-src="{{p.image[0]}}"
+                                    class="card-img-top" alt="..."></a>
+                            <div class="time-slot position-absolute">
+                                <span class="list-tour__time">
+                                    <i class="bi bi-alarm"></i>{{p.duration}}
+                                </span>
+                                <span class="list-tour__slot">
+                                    <i class="fas fa-user"></i>{{p.slots}}
+                                </span>
+                            </div>
+                            <div class="list-tour__sale position-absolute">
+                                <img src="{{p.saleImage}}" alt="">
+                                <div class="sale-detail">
+                                    <p class="sale-text">SALE</p>
+                                    <span class="sale-price">{{p.salePercent}}<span class="unit">%</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <a href="#!/chitiet/{{p.id}}" class="text-decoration-none">{{p.title}}</a>
+                            </h6>
+                            <div class="list-tour__left">
+                                <div class="list-tour__transport">
+                                    <i class="bi bi-person-walking"></i>
+                                    <span class="transport">{{p.transport}}</span>
+                                </div>
+                                <div class="list-tour__date">
+                                    <i class="bi bi-calendar-plus-fill"></i>{{p.date}}
+                                </div>
+                            </div>
+                            <div class="list-tour__right">
+                                <div class="list-tour__price">
+                                    <p class="price-title">Giá Từ</p>
+                                    <span class="price">{{p.price | number}} Đ</span>
+                                </div>
+                                <a href="#!/giohang/{{p.id}}" class="btn btn--placeholder float-end">ĐẶT TOUR</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-center">
+                        <a href="#" class="btn btn--viewmore">Xem Thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <article class="list-tour__box box">
+        <div class="container">
+            <div class="list-tour__head box-center page-tour__head">
+                <h3 class="text-primary">TOUR DU LỊCH ĐÀ LẠT</h3>
+            </div>
+            <div class="list-tour__rate page-tour__rate flex-column justify-content-center flex-md-row">
+
+                <div class="rate-star d-flex justify-content-center align-items-center">
+                    <p class="mt-3">Đánh giá:</p>
+                    <div class="star_wrap ms-2 me-2">
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                        <input type="radio" name="rate">
+                    </div>
+                    <p class="mt-3"><strong>5/5</strong> trong <strong>5</strong> đánh giá</p>
+                </div>
+            </div>
+        </div>
+        <div class="article__detail mt-5">
+            <div class="container">
+                <p><span style="color:rgb(0, 0, 0); font-family:roboto; font-size:14px">                
+                        Cho dù được mệnh danh là thành phố ngàn thông, thành phố hoa hay thành phố sương mù… thì Đà Lạt
+                        vẫn luôn có sức quyến rũ đặc biệt đối với nhiều du khách trong nước và thế giới. Do đó, hành
+                        trình đến <strong>du lịch Đà Lạt</strong> ở miền Nam trên dải đất hình chữ S luôn là những chuyến đi lý tưởng
+                        được nhiều du khách lựa chọn. Giữa không gian thanh bình và yên tĩnh, Đà Lạt hiện lên với khung
+                        cảnh mộng mơ và nên thơ nhờ cái lạnh cao nguyên ban đêm, sương mù buổi sáng cùng dải rừng thông
+                        bạt ngàn bao quanh. Chắc hẳn chỉ nhắc đến đây thôi cũng đủ để làm biết bao tâm hồn tín đồ du
+                        lịch phải háo hức trước vẻ đẹp thiên nhiên nơi đây. Hãy cùng tour du lịch đến Đà Lạt để tận
+                        hưởng nhiều trải nghiệm thú vị về địa điểm này nhé!<br />
+                        <br />
+                        Được thiên nhiên ưu ái ban tặng cho khí hậu ôn hòa của miền ôn đới, Đà Lạt dường như không có
+                        cái nóng bức của miền Nam hay cái lạnh tím tái của các tỉnh miền Bắc mà khí hậu nơi đây lúc nào
+                        cũng dịu mát. Với cái mát lạnh ấy của Đà Lạt và thiên nhiên tuyệt đẹp nơi đây đã được đi vào
+                        những áng văn thơ, những bức tranh ảnh, nghệ thuật. Do đó, Đà Lạt đã không chỉ thu hút du khách
+                        trong nước mà cả nước ngoài hàng năm đến đây tham quan và tận hưởng kỳ nghỉ tuyệt vời
+                        nhất.</span></p>
+
+
+            </div>
+
+        </div>
+    </article>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>

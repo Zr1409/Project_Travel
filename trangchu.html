@@ -1,0 +1,1650 @@
+<link rel="icon" href="images/favicon.ico">
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Popper.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<!-- Thêm slick.css -->
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+<!-- Thêm slick-theme.css -->
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+<style>
+  /* css menu */
+  .main {
+    margin-top: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .navbar-nav {
+    margin-left: 70px;
+    list-style: none;
+    text-align: center;
+  }
+
+  .navbar-nav .nav-link:hover {
+    background-color: rgb(223, 164, 47);
+    /* Màu nền khi di chuột lên */
+    color: white;
+    /* Màu chữ khi di chuột lên */
+  }
+
+  .nav-item {
+    line-height: 39px;
+  }
+
+  .nav-link {
+    color: white;
+  }
+
+  .navbar-toggler-custom {
+    background-color: rgb(250, 238, 238);
+    /* Thay đổi màu nền của nút menu thành đỏ */
+    border-color: red;
+    /* Thay đổi màu viền của nút menu thành đỏ */
+    /* Các thuộc tính CSS khác tùy chỉnh nút menu theo nhu cầu của bạn */
+  }
+
+  .container-fluid {
+    background-color: #3b5ba6;
+  }
+
+  /* Hiệu ứng gê chuột cho dropdown-menu */
+  /*.dropdown-menu .dropdown-item:hover {
+            background-color: #a02323;
+        }*/
+  .custom-dropdown-menu {
+    min-width: 950px;
+    /* Thiết lập độ rộng tối thiểu */
+    width: max-content;
+    /* Thiết lập độ rộng tối đa theo nội dung */
+  }
+
+  .custom-dropdown-menu2 {
+    min-width: 70px;
+    /* Thiết lập độ rộng tối thiểu */
+    width: max-content;
+    /* Thiết lập độ rộng tối đa theo nội dung */
+  }
+
+  .miennam-hover:hover {
+    color: #f32b2b;
+    border-bottom: 1px solid #d10a0a;
+    /* Gạch chân dưới tiêu đề MIỀN NAM khi hover */
+    cursor: pointer;
+    /* Hiển thị con trỏ chuột khi hover */
+  }
+
+  .miennam-hover {
+    color: #5431df;
+  }
+
+  /*--meadia quries start here--*/
+  @media(max-width:1400px) {
+    .custom-dropdown-menu {
+      min-width: 750px;
+      /* Thiết lập độ rộng tối thiểu */
+      width: max-content;
+      /* Thiết lập độ rộng tối đa theo nội dung */
+    }
+
+    .dropdown-menu .dropdown-item {
+      font-size: 14px;
+      /* Đặt kích thước font mong muốn */
+    }
+  }
+
+  @media(max-width:1280px) {
+    .navbar-nav .nav-link {
+      font-size: 14px;
+      /* Đặt kích thước font nhỏ hơn khi trên các thiết bị có kích thước nhỏ hơn */
+    }
+
+    .navbar-nav {
+      margin-left: 20px;
+    }
+
+    .custom-dropdown-menu {
+      min-width: 750px;
+      /* Thiết lập độ rộng tối thiểu */
+      width: max-content;
+      /* Thiết lập độ rộng tối đa theo nội dung */
+    }
+
+    .dropdown-menu .dropdown-item {
+      font-size: 14px;
+      /* Đặt kích thước font mong muốn */
+    }
+  }
+
+  @media(max-width:1120px) {
+    .navbar-nav .nav-link {
+      font-size: 12px;
+      /* Đặt kích thước font nhỏ hơn khi trên các thiết bị có kích thước nhỏ hơn */
+    }
+  }
+
+  @media(max-width:1024px) {
+    .custom-dropdown-menu {
+      min-width: 650px;
+      /* Thiết lập độ rộng tối thiểu */
+      width: max-content;
+      /* Thiết lập độ rộng tối đa theo nội dung */
+    }
+
+    .dropdown-menu .dropdown-item {
+      font-size: 14px;
+      /* Đặt kích thước font mong muốn */
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 12px;
+      /* Đặt kích thước font nhỏ hơn khi trên các thiết bị có kích thước nhỏ hơn */
+    }
+
+  }
+
+  @media(max-width:991px) {
+    .custom-dropdown-menu {
+      min-width: 650px;
+      /* Thiết lập độ rộng tối thiểu */
+      width: max-content;
+      /* Thiết lập độ rộng tối đa theo nội dung */
+    }
+
+    .dropdown-menu .dropdown-item {
+      font-size: 14px;
+      /* Đặt kích thước font mong muốn */
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 12px;
+      /* Đặt kích thước font nhỏ hơn khi trên các thiết bị có kích thước nhỏ hơn */
+    }
+  }
+
+  @media(max-width:900px) {
+    .custom-dropdown-menu {
+      min-width: 650px;
+      /* Thiết lập độ rộng tối thiểu */
+      width: max-content;
+      /* Thiết lập độ rộng tối đa theo nội dung */
+    }
+
+    .dropdown-menu .dropdown-item {
+      font-size: 14px;
+      /* Đặt kích thước font mong muốn */
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 12px;
+      /* Đặt kích thước font nhỏ hơn khi trên các thiết bị có kích thước nhỏ hơn */
+    }
+  }
+
+  @media(max-width:800px) {
+
+    .navbar-brand img {
+      width: 100px;
+      height: 40px;
+    }
+
+    .navbar-nav {
+      margin-left: 20px;
+    }
+
+    .navbar-nav .nav-link {
+      font-size: 12px;
+      /* Đặt kích thước font nhỏ hơn khi trên các thiết bị có kích thước nhỏ hơn */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-nav .dropdown-menu {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      max-height: calc(100vh - 200px);
+      /* Điều chỉnh độ cao tối đa của dropdown-menu, 56px là chiều cao của thanh navbar */
+      overflow-y: auto;
+      /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước của dropdown-menu */
+      box-shadow: none;
+    }
+
+    .navbar-nav .dropdown-menu.show {
+      display: block;
+    }
+
+    .navbar-nav .dropdown-item {
+      width: 100%;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+
+    /* Sử dụng media query để áp dụng CSS chỉ khi màn hình có chiều rộng tối đa là 768px (chế độ di động) */
+    .navbar-toggler {
+      border-color: #fff;
+      /* Đổi màu viền của nút menu thành màu trắng */
+    }
+
+    .navbar-toggler-icon::before {
+      color: #ff0000 !important;
+      /* Thay đổi màu thành màu đỏ */
+    }
+
+    .navbar-toggler:hover {
+      border-color: #f90;
+      /* Màu viền khi nút menu được nhấn */
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    .navbar-brand img {
+      width: 130px;
+      /* Giảm kích thước của logo khi màn hình thu nhỏ */
+      height: 40px;
+    }
+
+    .navbar-collapse {
+      margin-left: 40px;
+      background-color: #3b5ba6;
+      /* Đổi màu nền của thanh menu khi màn hình thu nhỏ */
+    }
+
+
+    .form-control {
+      margin-bottom: 5px;
+    }
+
+
+    .btn {
+      margin-bottom: 5px;
+      color: black;
+    }
+
+    .navbar-nav {
+      margin-left: 0px;
+      list-style: none;
+      text-align: left;
+    }
+
+    .navbar-nav .nav-link,
+    .nav-item {
+      color: white !important;
+      padding-left: 5px;
+      margin: 2px 0px;
+      /* Thiết lập margin ở trên và dưới của mỗi phần tử khi màn hình thu nhỏ */
+    }
+
+    /* Ẩn các mục con của dropdown menu khi màn hình thu nhỏ */
+    .dropdown-menu {
+      display: none;
+    }
+
+    /* Hiển thị dropdown menu khi mở menu trên màn hình thu nhỏ */
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar-nav .nav-link.text-black {
+      color: black;
+      /* Thiết lập màu chữ thành màu đen */
+    }
+
+  }
+
+  .navbar-brand img {
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+
+  .navbar-brand img:hover {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+
+
+
+  /* Next & previous buttons */
+  /* Thay đổi kích thước và màu sắc của biểu tượng */
+
+
+  .banner-home {
+    position: relative;
+
+    /* Khai báo position: relative để tạo khung chứa */
+  }
+
+  .home-search {
+    padding: 15px;
+    background-color: white;
+    position: absolute;
+    /* Đặt form ở vị trí tùy chỉnh */
+    top: 75%;
+    left: 10%;
+    /* Đặt top ở giữa ảnh */
+    right: 10%;
+    z-index: 1;
+    /* Đảm bảo form nằm trên ảnh */
+  }
+
+  #search-icon:hover {
+    color: blue;
+    /* Màu mới bạn muốn áp dụng khi di chuột lên */
+  }
+
+  @media only screen and (max-width: 768px) {
+    .home-search {
+      padding: 15px;
+      background-color: white;
+      position: absolute;
+      /* Đặt form ở vị trí tùy chỉnh */
+      top: 40%;
+    }
+  }
+
+  .btn-search {
+    width: 150px;
+    font-size: 20px;
+    background-color: #ff9800;
+    color: rgb(240, 239, 239);
+  }
+
+  .btn-search:hover {
+    background-color: #d27f02;
+    color: rgb(240, 239, 239) !important;
+  }
+
+  .card {
+    margin-top: 5px;
+    /* Tương đương với pl-3 */
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(1, 1, 163);
+  }
+
+
+  .list-tour__img {
+    position: relative;
+    color: #fff;
+  }
+
+  .list-tour__img a {
+    display: block;
+    overflow: hidden;
+  }
+
+  .list-tour__img a img {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+
+  .list-tour__img a img:hover {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+
+  .hover06 {
+    position: relative;
+    color: #fff;
+  }
+
+  .hover06 a {
+    display: block;
+    overflow: hidden;
+  }
+
+  .hover06 a img {
+    -webkit-transform: rotate(15deg) scale(1.4);
+    transform: rotate(15deg) scale(1.4);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+
+  .hover06 a img:hover {
+    -webkit-transform: rotate(0) scale(1);
+    transform: rotate(0) scale(1);
+  }
+
+  .time-slot {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    color: #fff;
+    font-size: 1rem;
+    width: calc(100% - 2rem);
+    display: flex;
+    justify-content: space-between;
+    text-shadow: 0px 0px 5px #333;
+  }
+
+  .list-tour__sale {
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+
+  .list-tour__sale img {
+    height: 60px;
+    aspect-ratio: auto 64 / 60;
+    width: 64px;
+  }
+
+  .sale-detail {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .sale-text {
+    margin-bottom: 0;
+    margin-top: 2px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  .sale-price {
+    font-size: 1.2rem;
+    margin-top: -9px;
+    margin-left: 7px;
+  }
+
+  .unit {
+    font-size: 1rem;
+  }
+
+  .list-tour__left {
+    float: left;
+    width: 60%;
+    /* Chiều rộng của phần tử bên trái */
+    color: #484848;
+  }
+
+
+  .list-tour__right {
+    float: right;
+    /* Đẩy phần tử bên phải sang phải */
+    width: 40%;
+    /* Chiều rộng của phần tử bên phải */
+    text-align: right;
+    /* Căn chỉnh văn bản sang phải */
+    margin: 0;
+    padding: 0;
+  }
+
+  .price-title,
+  .price {
+    margin: 0;
+    padding: 0;
+  }
+
+  .price-title {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0;
+  }
+
+  span.price {
+    color: #c8781d;
+  }
+
+  .btn--placeholder {
+    display: block;
+    padding: 3px 10px;
+    width: 100%;
+    background-color: #ff9800;
+    color: #fff;
+  }
+
+  .btn {
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 5px 10px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+
+  .btn--placeholder:hover {
+    background-color: #c07403;
+    color: #fff;
+  }
+
+  .box-content {
+
+    margin-bottom: 25px;
+  }
+
+  .img-fluid {
+    width: 100%;
+    height: 200px;
+  }
+
+  /* Ẩn carousel trên màn hình lớn */
+  @media (min-width: 768px) {
+    .mobile-carousel {
+      display: none;
+    }
+  }
+
+  /* Hiển thị carousel trên thiết bị di động */
+  @media (max-width: 767px) {
+    .mobile-carousel {
+      display: block;
+    }
+  }
+
+  .img-fluid {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+  }
+
+  .img-fluid:hover {
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+
+  .slick-slide {
+    text-align: center;
+  }
+
+  .slick-list {
+    margin: 0 auto;
+    /* Căn giữa carousel */
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgb(180, 176, 176);
+    /* Thay đổi màu sắc thành màu đỏ */
+  }
+
+  /* Nếu bạn muốn thay đổi màu sắc của biểu tượng khi rê chuột vào, bạn có thể sử dụng */
+  .carousel-control-prev:hover .carousel-control-prev-icon,
+  .carousel-control-next:hover .carousel-control-next-icon {
+    background-color: rgb(243, 136, 78);
+    /* Thay đổi màu sắc thành màu xanh khi rê chuột vào */
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background-color: rgba(233, 12, 12, 0.5);
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(24, 24, 247);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .carousel-control-prev {
+    left: 20px;
+    /* Nút điều hướng prev ở bên trái */
+  }
+
+  .carousel-control-next {
+    right: 20px;
+    /* Nút điều hướng next ở bên phải */
+  }
+
+  /* css footer */
+  .footer {
+    padding-top: 45px;
+    background-color: #3b5ba6;
+    color: #fff;
+  }
+
+  .footer-top {
+    font-family: "Tahoma", Verdana;
+    font-size: 13.5px;
+  }
+
+  .footer-top .container {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #fff;
+  }
+
+
+  .footer__address {
+    margin-bottom: 10px;
+  }
+
+  .footer__address ul {
+    padding-left: 10px;
+    list-style: none;
+    margin-bottom: 0;
+  }
+
+  .footer__address li {
+    line-height: 24px;
+  }
+
+  .footer__address a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+
+  .card-payment {
+    width: 100%;
+    height: 48px;
+  }
+
+  .footer__caption {
+    margin-bottom: 10px;
+  }
+
+  .footer__caption span {
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #e4e6e8;
+    text-transform: uppercase;
+    font-size: 15pt;
+    font-weight: bold;
+    display: block;
+  }
+
+  .caption-bottom {
+    display: block;
+    background-color: #ff9800;
+    width: 80px;
+    height: 4px;
+  }
+
+  .card-payment {
+    width: 100%;
+    height: 48px;
+  }
+
+  .card-payment span:nth-child(1) {
+    background-position: 0 0;
+    display: none;
+  }
+
+  .card-payment span:nth-child(2) {
+    background-position: 0 -48px;
+    display: none;
+  }
+
+  .card-payment span:nth-child(3) {
+    background-position: 0 -96px;
+  }
+
+  .card-payment span:nth-child(4) {
+    background-position: 0 -144px;
+  }
+
+  .card-payment span:nth-child(5) {
+    background-position: 0 -192px;
+  }
+
+  .card-payment span:nth-child(6) {
+    background-position: 0 -240px;
+  }
+
+  .card-payment span {
+    display: block;
+    height: 48px;
+    width: 48px;
+    float: left;
+    margin-left: 10px;
+    background: url(/ASM/images/sprites48.png) no-repeat left;
+  }
+
+  .footer__mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .logo-footer {
+    text-align: center;
+  }
+
+  .logo-footer img {
+    width: 234px;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    /* box-shadow: 3px 0px 3px 3px #fff; */
+  }
+
+  .social-wp span {
+    font-family: "Open Sans Condensed", Tahoma;
+    color: #e4e6e8;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  ul.list-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ul.list-social li {
+    margin: 0 5px;
+  }
+
+  ul.list-social a {
+    text-decoration: none;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    height: 45px;
+    width: 45px;
+    border: solid 1px silver;
+    background: transparent;
+    color: #f3f3f3;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+
+  ul.list-social a:hover {
+    background-color: #fff;
+    color: #145d9e;
+    transition: all 0.3s ease;
+  }
+
+  .bi {
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    font-family: 'Font Awesome 5 Brands';
+    font-weight: 400;
+  }
+
+  .footer__intro {
+    line-height: 22px;
+    font-size: 13.5px;
+    color: #e4e6e8;
+    text-align: justify;
+  }
+
+  .receive-info {
+    padding: 10px 15px;
+    background-color: #fff;
+    color: #333;
+  }
+
+  .receive-info__head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .receive-info__head img {
+    display: inline-block;
+    padding-right: 10px;
+    object-fit: contain;
+    width: 60px;
+    max-width: 100%;
+    vertical-align: middle;
+    border-style: none;
+  }
+
+  .receive-info__head span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0f62ac;
+  }
+
+  .receive-info form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .receive-info .form-group {
+    padding-bottom: 10px;
+  }
+
+  .receive__group label {
+    font-size: 13px;
+  }
+
+  .form-group label {
+    font-size: 1.5rem;
+    color: #015196;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 15px;
+  }
+
+  .receive-info label span {
+    color: #ff0013;
+  }
+
+  .receive-info .form-control {
+    height: 32px;
+    padding: 8px;
+    font-size: 1rem;
+  }
+
+  .form-control {
+    cursor: pointer;
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+
+  .btn-signup {
+    margin-top: 20px;
+    background-color: #3b5ba6;
+    color: #fff;
+    text-transform: uppercase;
+    width: 30%;
+    height: 40px;
+  }
+
+  .footer-bottom {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .footer-info {
+    font-size: 10pt;
+    color: #fff;
+    font-family: "Tahoma", Verdana;
+  }
+
+  .btn-block {
+    display: block;
+    width: 100%;
+  }
+
+  .receive__group input[type="text"]::placeholder,
+  .receive__group input[type="tel"]::placeholder,
+  .receive__group input[type="email"]::placeholder,
+  .receive__group input[type="diachi"]::placeholder {
+    font-style: italic;
+    /* In nghiêng chữ trong placeholder */
+    font-size: 13px;
+    /* Kích thước chữ trong placeholder */
+  }
+
+  .btn-signup:hover {
+    background-color: #042e54;
+    /* Màu nền khi di chuột qua */
+    color: #fff;
+    /* Màu chữ khi di chuột qua */
+  }
+</style>
+
+<body ng-controller="myCtrlTrangChu">
+  <div class="main">
+    <div class="banner-home">
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img style="height: 700px;" src="images/family-photographer-Dubai-UAE-Monika-Wasylewska-040.jpg"
+              class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img style="height: 700px;" src="images/Hotel-Woodstock-Family-1-1366x768-fp_mm-fpoff_0_0.jpg"
+              class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img style="height: 700px;" src="images/top-10-things-to-do-in-dubai-with-kids-and-family.jpg"
+              class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img style="height: 700px;" src="images/tour-phu-quoc-gia-re-14488468238924.jpg" class="d-block w-100"
+              alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <form >
+        <div class="home-search">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="home-search__head box__head">
+                  <h5
+                    style="color: rgb(4, 4, 139); font-weight: bold; border-bottom: 1px solid #d10a0a; cursor: pointer;">
+                    TÌM KIẾM TOUR</h5>
+                </div>
+              </div>
+              <div class="col-lg-12 mb-3">
+                <div class="home-search__input row"> <!-- Thêm lớp 'row' để tạo một hàng -->
+                  <div class="form-group col-lg-4 "> <!-- Chia cột thành 4 phần tương ứng với 33.3% của hàng -->
+                    <input type="radio" name="territory" id="inland" value="inland" checked>
+                    <label for="inland" style="color: rgb(4, 4, 139);font-weight: bold;">TOUR TRONG NƯỚC</label>
+                  </div>
+                  <div class="form-group col-lg-4 "> <!-- Chia cột thành 4 phần tương ứng với 33.3% của hàng -->
+                    <input type="radio" name="territory" id="foreign" value="foreign" disabled>
+                    <label for="foreign" style="color: rgb(4, 4, 139);font-weight: bold;">TOUR NƯỚC NGOÀI</label>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col-lg-3 col-md-6 col-sm-12 ">
+                <div class="form-group group-parent position-relative">
+                  <label for="start_point" class="d-block d-lg-none">Nơi khởi hành:</label>
+                  <span class="fas fa-map-marker-alt"></span>
+                  <select name="StartingPoint" id="start_point" class="hidden-arow form-input form-control">
+                    <option value="">Điểm xuất phát</option>
+                    <option value="124">Hà Nội</option>
+                    <option value="125">Huế</option>
+                    <option value="126">Hồ Chí Minh</option>
+                    <option value="1123">Nam Định</option>
+                    <option value="1124">Đà Nẵng</option>
+                    <option value="1125">Mộc Châu</option>
+                    <option value="1127">Hạ Long</option>
+                    <option value="1128">Sapa</option>
+                    <option value="1129">Đà Lạt</option>
+                    <option value="1130">Quy Nhơn</option>
+                    <option value="1131">Thanh Hóa</option>
+                    <option value="1132">Phú Quốc</option>
+                    <option value="1133">Côn Đảo</option>
+                    <option value="1135">Nha Trang</option>
+                    <option value="1140">Tour nghỉ lễ 30-04</option>
+                    <option value="1141">Tour theo mùa</option>
+                    <option value="1142">Tour mùa thu</option>
+                    <option value="1143">Du lịch hè</option>
+                    <option value="1144">Ninh Bình</option>
+                    <option value="1146">Cà Mau</option>
+                  </select>
+                  <span style=" position: absolute;
+                            color: rgb(1, 1, 126);
+                            top: 50%;
+                            right: 10px; /* Cần chỉnh sửa tùy theo vị trí mong muốn */
+                            transform: translateY(-50%);" class="icon"><i class="bi bi-geo-alt-fill"></i></span>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-12 ">
+                <div class="form-group group-parent position-relative">
+                  <label for="where-togo" class="d-block d-lg-none">Nơi đến:</label>
+                  <span class="fas fa-map-marker-alt"></span>
+                  <select name="Destination" id="where-togo" class="hidden-arow form-input form-control"
+                    ng-model="selectedNameTour">
+                    <option value="">Bạn muốn đi đâu</option>
+                    <option value="Hà Nội">Hà Nội</option>
+                    <option value="Huế">Huế</option>
+                    <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                    <option value="Đà Nẵng">Đà Nẵng</option>
+                    <option value="Mộc Châu">Mộc Châu</option>
+                    <option value="Hạ Long">Hạ Long</option>
+                    <option value="SaPa">Sapa</option>
+                    <option value="Đà Lạt">Đà Lạt</option>
+                    <option value="Quy Nhơn">Quy Nhơn</option>
+                    <option value="Phú Quốc">Phú Quốc</option>
+                    <option value="Côn Đảo">Côn Đảo</option>
+                    <option value="Nha Trang">Nha Trang</option>
+                    <option value="Ninh Bình">Ninh Bình</option>
+                    <option value="Cà Mau">Cà Mau</option>
+                  </select>
+                  <span style=" position: absolute;
+                            color: rgb(1, 1, 126);
+                            top: 50%;
+                            right: 10px; /* Cần chỉnh sửa tùy theo vị trí mong muốn */
+                            transform: translateY(-50%);" class="icon"><i class="bi bi-geo-alt-fill"></i></span>
+
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-6 col-sm-12 ">
+                <div class="form-group group-parent position-relative">
+                  <label for="schedule" class="d-block d-lg-none">Lịch trình:</label>
+                  <span class="fas fa-clock"></span>
+                  <select name="NumberDay" id="schedule" class="hidden-arow form-input form-control"
+                    ng-model="selectedNumberOfDays">
+                    <option value="">Lịch Trình</option>
+                    <option value="Hàng ngày"> Hàng ngày</option>
+                    <option value="1 Ngày / 0 Đêm"> 1 Ngày / 0 Đêm </option>
+                    <option value="2 Ngày / 1 Đêm"> 2 Ngày / 1 Đêm </option>
+                    <option value="3 Ngày / 2 Đêm"> 3 Ngày / 2 Đêm </option>
+                    <option value="4 Ngày / 3 Đêm"> 4 Ngày / 3 Đêm </option>
+                    <option value="5 Ngày / 4 Đêm"> 5 Ngày / 4 Đêm </option>
+                    <option value="6 Ngày / 5 Đêm"> 6 Ngày / 5 Đêm </option>
+                    <option value="7 Ngày / 6 Đêm"> 7 Ngày / 6 Đêm </option>
+                    <option value="8 Ngày / 7 Đêm"> 8 Ngày / 7 Đêm </option>
+
+                  </select>
+                  <span style=" position: absolute;
+                            color: rgb(1, 1, 126);
+                            top: 50%;
+                            right: 10px; /* Cần chỉnh sửa tùy theo vị trí mong muốn */
+                            transform: translateY(-50%);" class="icon"><i class="bi bi-clock-fill"></i></span>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-6 col-sm-12 p-lg-0 ">
+                <div class="form-group group-parent position-relative">
+                  <label for="price-area" class="d-block d-lg-none">Khoảng giá: </label>
+                  <span class="fas fa-dollar-sign"></span>
+                  <select name="PriceFrom" id="price-area" class="hidden-arow form-input form-control"
+                    ng-model="selectedPriceRange">
+                    <option value="">Khoảng giá</option>
+                    <option value="0-3000000"> Dưới 3 Triệu </option>
+                    <option value="3000000-10000000"> Từ 3 Triệu - 10 Triệu </option>
+                    <option value="10000000-25000000"> Từ 10 Triệu - 25 Triệu </option>
+                    <option value="25000000-40000000"> Từ 25 Triệu - 40 Triệu </option>
+                    <option value="40000000"> Trên 40 Triệu </option>
+                  </select>
+                  <span style=" position: absolute;
+                            
+                            color: rgb(1, 1, 126);
+                            top: 50%;                           
+                            right: 10px; /* Cần chỉnh sửa tùy theo vị trí mong muốn */
+                            transform: translateY(-50%);" class="icon"><i class="bi bi-currency-dollar"></i></span>
+                </div>
+              </div>
+
+              <div class="col-lg-2 col-md-6 col-sm-12 ">
+                <div class="form-btn col-log-12">
+                  <button type="submit" class="btn btn-search" ng-click="search()">
+                    <i class="bi bi-search text-white" id="search-icon">Tìm kiếm</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- end banner -->
+    <div class="my-service box-custom bg-gray" style="margin-top: 20px;">
+      <div class="container">
+        <div class="my-service__head box__head">
+          <h3 class="text-center no-border mb-3"><strong>DỊCH VỤ CỦA CHÚNG TÔI</strong></h3>
+        </div>
+        <!--  -->
+        <div class="row" id="service-carousel">
+          <div class="card text-center col-sm-6 col-md-4 col-lg-3 ">
+            <div class="card-header">
+              <img src="images/service2.png" alt="">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">THUÊ XE</h5>
+              <p class="card-text"> Venus Travel cung cấp và mang đến cho quý khách dịch vụ cho thuê xe du lịch, xe dịch
+                vụ với giá cực tốt, xe đời mới 16 chỗ; 29 chỗ; 35 chỗ; 45 chỗ … liên hệ để có bảng giá xe du lịch mà
+                Venus Travel đang cung cấp</p>
+            </div>
+            <div class="card-footer text-body-secondary">
+              <a href="#" class="btn btn-primary">Xem Thêm</a>
+            </div>
+          </div>
+          <div class="card text-center col-sm-6 col-md-4 col-lg-3">
+            <div class="card-header">
+              <img src="images/service3.png" alt="">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">DU LỊCH VENUS</h5>
+              <p class="card-text"> Du lịch nghỉ dưỡng kết hợp hội nghị hội thảo cùng Venus Travel - đơn vị tiên phong
+                trong việc tổ chức du lịch MICE chuyên nghiệp với đội ngũ nhân viên nhiệt tình, giàu kinh nghiệm.</p>
+            </div>
+            <div class="card-footer text-body-secondary">
+              <a href="#" class="btn btn-primary">Xem Thêm</a>
+            </div>
+          </div>
+          <div class="card text-center col-sm-6 col-md-4 col-lg-3">
+            <div class="card-header">
+              <img src="images/icon11.png" alt="" width="70" height="40">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">DU THUYỀN</h5>
+              <p class="card-text">Trải nghiệm du lịch đường thủy với các du thuyền nghỉ dưỡng đầy mê hoặc. Truy cập
+                ngay và lựa chọn hành trình phù hợp cho gia đình bạn.</p>
+            </div>
+            <div class="card-footer text-body-secondary">
+              <a href="#" class="btn btn-primary">Xem Thêm</a>
+            </div>
+          </div>
+          <div class="card text-center col-sm-6 col-md-4 col-lg-3">
+            <div class="card-header">
+              <img src="images/service3.png" alt="">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">COMBO DU LỊCH</h5>
+              <p class="card-text"> Đặt theo combo, có tất cả các dịch vụ cần thiết.</p>
+            </div>
+            <div class="card-footer text-body-secondary">
+              <a href="#" class="btn btn-primary">Xem Thêm</a>
+            </div>
+          </div>
+        </div>
+
+        <!--  -->
+      </div>
+    </div>
+    <!--  end my-service -->
+    <div class="hot-tour box">
+      <div class="container mt-5">
+        <div class="box__head-wp">
+          <h4> <a href="" class="text-decoration-none"
+              style="border-bottom: 1px solid #d10a0a; cursor: pointer;"><strong style="color: rgb(4, 4, 139);">HOT
+                TOUR</strong></a></h4>
+        </div>
+        <div class="row">
+          <!-- filter: { category: 'miền Bắc' } limitTo:4-->
+          <div class=" card col-sm-6 col-md-4 col-lg-3" ng-repeat="p in products | filter: { category: 'hot Tour' } ">
+            <div class="list-tour__img position-relative">
+              <a href="#!/chitiet/{{p.id}}"><img style="height: 210px;" ng-src="{{p.image[0]}}" class="card-img-top"
+                  alt="..."></a>
+              <div class="time-slot position-absolute">
+                <span class="list-tour__time">
+                  <i class="bi bi-alarm"></i> {{p.duration}}
+                </span>
+                <span class="list-tour__slot">
+                  <i class="fas fa-user"></i>{{p.slots}}
+                </span>
+              </div>
+              <div class="list-tour__sale position-absolute">
+                <img ng-src="{{p.saleImage}}" alt="">
+                <div class="sale-detail">
+                  <p class="sale-text">SALE</p>
+                  <span class="sale-price">{{p.salePercent}}<span class="unit">%</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h6 class="card-title">
+                <a href="#!/chitiet/{{p.id}}" class="text-decoration-none">
+                  {{p.title}}
+                </a>
+              </h6>
+              <div class="list-tour__left">
+                <div class="list-tour__transport">
+                  <i class="bi bi-person-walking"></i>
+                  <span class="transport">{{p.transport}}</span>
+                </div>
+                <div class="list-tour__date">
+                  <i class="bi bi-calendar-plus-fill"></i> {{p.date}}
+                </div>
+              </div>
+              <div class="list-tour__right">
+                <div class="list-tour__price">
+                  <p class="price-title">Giá Từ</p>
+                  <span class="price">{{p.price | number}} Đ</span>
+                </div>
+                <a href="#!/giohang/{{p.id}}"  class="btn btn--placeholder float-end">ĐẶT TOUR</a>
+
+              </div>
+            </div>
+          </div>
+
+          <!--  -->
+
+        </div>
+      </div>
+
+    </div>
+    <!-- end hot-tour -->
+    <div class="featured-post box">
+      <div class="container mt-5">
+        <h4>
+          <a href="" class="text-decoration-none" style="border-bottom: 1px solid #d10a0a; cursor: pointer;">
+            <strong style="color: rgb(4, 4, 139)">ĐIỂM ĐẾN NỔI BẬT</strong>
+          </a>
+        </h4>
+        <div class="box--text">
+          Xứng đáng với danh xưng “Rừng vàng biển bạc”, Việt Nam mang đến những bức họa đẹp đến nao lòng dành tặng cho
+          du khách. Dù đang trong rừng sâu hay trầm mình cùng biển lặng, dù mơ màng với làn mây bồng bềnh ở đỉnh núi cao
+          ngất hay hòa mình cùng làn nước đại dương xanh trong, trái tim ai kia vẫn rộn ràng những cung bậc cảm xúc khó
+          tả Yêu lắm một Việt Nam đẹp đến vô ngần.
+        </div>
+        <div id="carouselExampleAutoplaying" class="carousel slide mt-4" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="position-relative">
+                    <img class="img-fluid d-block mx-auto"
+                      src="https://venustravel.webtravel.vn/Files/Images/Destinations/hanoi-travel-guide-cover.jpg"
+                      alt="Hà Nội">
+                    <div class="box-slide__text position-absolute" style="bottom: 8px; left: 40%;">
+                      <a href="" class="text-decoration-none text-white"><span><strong>Hà Nội</strong></span></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="position-relative">
+                    <img class="img-fluid d-block mx-auto"
+                      src="https://venustravel.webtravel.vn/Files/Images/Destinations/ve-may-bay-di-hue-14042020-2.jpg"
+                      alt="Huế">
+                    <div class="box-slide__text position-absolute" style="bottom: 8px; left: 40%;">
+                      <a href="" class="text-decoration-none text-white"><span><strong>Huế</strong></span></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="position-relative">
+                    <img class="img-fluid d-block mx-auto"
+                      src="https://venustravel.webtravel.vn/Files/Images/Destinations/hcm.jpg" alt="Hồ Chí Minh">
+                    <div class="box-slide__text position-absolute" style="bottom: 8px; left: 40%;">
+                      <a href="" class="text-decoration-none text-white"><span><strong>Hồ Chí Minh</strong></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="position-relative">
+                    <img class="img-fluid d-block mx-auto"
+                      src="https://venustravel.webtravel.vn/files/images/tours/ve-may-bay-di-da-nang-14-3-2020-2.jpg"
+                      alt="Đà Nẵng">
+                    <div class="box-slide__text position-absolute" style="bottom: 8px; left: 40%;">
+                      <a href="" class="text-decoration-none text-white"><span><strong>Đà Nẵng</strong></span></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="position-relative">
+                    <img class="img-fluid d-block mx-auto"
+                      src="https://venustravel.webtravel.vn/files/images/location/121690.png" alt="Quy Nhơn">
+                    <div class="box-slide__text position-absolute " style="bottom: 8px; left: 40%;">
+                      <a href="" class="text-decoration-none text-white"><span><strong>Quy Nhơn</strong></span></a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                  <div class="position-relative">
+                    <img class="img-fluid d-block mx-auto"
+                      src="https://venustravel.webtravel.vn/files/images/location/63543.png" alt="Phú Quốc">
+                    <div class="box-slide__text position-absolute" style="bottom: 8px; left: 40%;">
+                      <a href="" class="text-decoration-none text-white"><span><strong>Phú Quốc</strong></span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- end featured-post -->
+    <div class="hot-tour box">
+      <div class="container mt-5">
+        <div class="box__head-wp">
+          <h4> <a href="" class="text-decoration-none"
+              style="border-bottom: 1px solid #d10a0a; cursor: pointer;"><strong style="color: rgb(4, 4, 139)">TOUR NỔI
+                BẬT</strong></a></h4>
+        </div>
+        <div class="row">
+          <div class=" card col-sm-6 col-md-4 col-lg-3"
+            ng-repeat="p in products | filter: { category: 'tour Nổi Bật' } | limitTo: 8 ">
+            <div class="list-tour__img position-relative">
+              <a href="#!/chitiet/{{p.id}}"><img style="height: 210px;" ng-src="{{p.image[0]}}" class="card-img-top"
+                  alt="..."></a>
+              <div class="time-slot position-absolute">
+                <span class="list-tour__time">
+                  <i class="bi bi-alarm"></i> {{p.duration}}
+                </span>
+                <span class="list-tour__slot">
+                  <i class="fas fa-user"></i>{{p.slots}}
+                </span>
+              </div>
+              <div class="list-tour__sale position-absolute">
+                <img ng-src="{{p.saleImage}}" alt="">
+                <div class="sale-detail">
+                  <p class="sale-text">SALE</p>
+                  <span class="sale-price">{{p.salePercent}}<span class="unit">%</span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h6 class="card-title">
+                <a href="#!/chitiet/{{p.id}}" class="text-decoration-none">
+                  {{p.title}}
+                </a>
+              </h6>
+              <div class="list-tour__left">
+                <div class="list-tour__transport">
+                  <i class="bi bi-person-walking"></i>
+                  <span class="transport">{{p.transport}}</span>
+                </div>
+                <div class="list-tour__date">
+                  <i class="bi bi-calendar-plus-fill"></i> {{p.date}}
+                </div>
+              </div>
+              <div class="list-tour__right">
+                <div class="list-tour__price">
+                  <p class="price-title">Giá Từ</p>
+                  <span class="price">{{p.price | number}} Đ</span>
+                </div>
+                <a href="#!/giohang/{{p.id}}" class="btn btn--placeholder float-end">ĐẶT TOUR</a>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+
+        </div>
+      </div>
+
+    </div>
+    <!-- end tour nổi bật -->
+    <div class="hot-tour box">
+      <div class="container mt-5 mrcombo ">
+        <div class="box__head-wp">
+          <h4> <a href="" class="text-decoration-none"
+              style="border-bottom: 1px solid #d10a0a; cursor: pointer;"><strong
+                style="color: rgb(4, 4, 139)">COMBO</strong></a></h4>
+        </div>
+        <div class="row ">
+          <div class="card col-sm-6 col-md-4" ng-repeat="p in products | filter: { category: 'combo' }">
+            <div class=" hover06   position-relative">
+              <a href="#!/chitiet/{{p.id}}"><img style="height: 250px;" ng-src="{{p.image[0]}}" class="card-img-top"
+                  alt="..."></a>
+              <div class="time-slot position-absolute">
+                <span class="list-tour__time">
+                  <i class="bi bi-alarm"></i> {{p.duration}}
+                </span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <h6 class="card-title">
+                <a href="#!/chitiet/{{p.id}}" class="text-decoration-none">
+                  {{p.title}}
+                </a>
+              </h6>
+              <div class="list-tour__left">
+                <div class="list-tour__transport">
+                  <span class="transport">Loại Combo:</span>
+                </div>
+                <div class="list-tour__date">
+                  <span class="transport">Điều kiện: Tối Thiểu 2 Người</span>
+                </div>
+                <div class="list-tour__date">
+                  <span class="transport">Bao Gồm:</span>
+                </div>
+              </div>
+              <div class="list-tour__right">
+                <div class="list-tour__price">
+                  <p class="price-title">Giá Từ</p>
+                  <span class="price">{{p.price | number}} Đ</span>
+                  <br>
+                  <span class="price">Người/Đêm</span>
+                </div>
+                <a href="#!/giohang/{{p.id}}" class="btn btn--placeholder float-end">ĐẶT TOUR</a>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+
+
+        </div>
+      </div>
+
+    </div>
+    <!-- end combo -->
+    <div class="gallery-box box">
+      <div class="box__head">
+        <div class="container mt-5">
+          <h4><strong style="color: rgb(4, 4, 139); border-bottom: 1px solid #d10a0a; cursor: pointer; ">THƯ
+              VIỆN</strong></h4>
+        </div>
+      </div>
+      <div class="image-box">
+        <div class="sub-title">
+          <div class="container mt-4">
+            <div class="box__head-wp">
+              <h6 style="color: rgb(4, 4, 139);"> <strong> <strong style="color: red;">|</strong> HÌNH ẢNH</strong></h6>
+            </div>
+          </div>
+        </div>
+        <!-- owl-carousel slide -->
+        <div class="row image-box__slide ">
+          <div class="col-6 col-md-2">
+            <div class="image-box__item mb-2">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-hoa-lu-tam-coc-1ngay/mon-ngon-dac-san-ninh-binh-cua-la-lot.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-hoa-lu-tam-coc-1ngay/mon-ngon-dac-san-ninh-binh.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-hoa-lu-tam-coc-1ngay/84b81438-ff44-448a-b87f-393221346695.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-hoa-lu-tam-coc-1ngay/thung-nham-ninh-binh.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-nha-trang-4-ngay-3-dem/Dieu-luon-0303-A9I02924.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-nha-trang-4-ngay-3-dem/Ba-ba-om-chu%E1%BB%91i-%C4%91%E1%BA%ADu.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-nha-trang-4-ngay-3-dem/banh-can.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-nha-trang-4-ngay-3-dem/hai-san-gio-bien.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-nha-trang-4-ngay-3-dem/nha-hang-phuong-dong-7.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-hoa-lu-tam-coc-1ngay/mon-ngon-dac-san-ninh-binh-cua-la-lot.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-nha-trang-4-ngay-3-dem/be-chu-lam-4.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2">
+            <div class="image-box__item">
+              <div class="image-box__img box-slide__img">
+                <img
+                  src="https://venustravel.webtravel.vn/files/images/tours/tour-du-lich-hoa-lu-tam-coc-1ngay/mon-ngon-dac-san-ninh-binh.jpg"
+                  alt="" class="img-thumbnail">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="customer box-custom bg-gray">
+      <div class="container mt-5">
+        <div class="box__head">
+          <h3 class="text-center no-border"><strong>ĐỐI TÁC CỦA CHÚNG TÔI</strong></h3>
+        </div>
+      </div>
+
+      <!-- Container bao bọc cả carousel và nút điều hướng -->
+      <div id="carouselExampleAutoplaying" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/vnairline.png" alt="First slide">
+              </div>
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/logosofit.jpg" alt="First slide">
+              </div>
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/Jeju-air-logo.png" alt="Second slide">
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/vnairline.png" alt="First slide">
+              </div>
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/logosofit.jpg" alt="First slide">
+              </div>
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/Jeju-air-logo.png" alt="Second slide">
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/vnairline.png" alt="First slide">
+              </div>
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/logosofit.jpg" alt="First slide">
+              </div>
+              <div class="col">
+                <img class="d-block mx-auto" style="width: 90px; margin-top: 25px;"
+                  src="https://venustravel.webtravel.vn/Assets/images/Jeju-air-logo.png" alt="Second slide">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+  <!-- end main -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>

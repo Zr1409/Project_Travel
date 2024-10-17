@@ -1,0 +1,226 @@
+
+.card-detail-wp {
+    border-radius: 4px;
+}
+
+.cart-detail {
+    padding: 15px;
+    background-color: #e4f4fb;
+}
+.product-avatar {
+    border-radius: 3px;
+    overflow: hidden;
+}
+.product-avatar img {
+    height: 164px;
+    object-fit: cover;
+}
+.card-empty {
+    text-align: center;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    display: block;
+}
+.cart-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+.card-empty p {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+.backhome-btn {
+    font-size: 16px;
+    padding: 8px 15px;
+    color: #fff;
+    background: #0087ff;
+    border-radius: 5px;
+}
+.backhome-btn{
+    padding: 8px 15px;
+    color: #fff;
+    background: #0087ff;
+    border-radius: 3px;
+}
+.backhome-btn:hover{
+    background: #014480;
+
+}
+.pay-form h4 {
+    margin-top: 40px;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.payform-note {
+    font-size: 14px;
+    margin: 15px 0 15px 10px;
+    font-weight: 500;
+}
+.payform__info {
+    padding-left: 8px;
+}
+.form__group {
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.form__group label {
+    font-weight: 600;
+    min-width: 135px;
+    margin-bottom: 0;
+}
+.form__control {
+    width: 300px;
+    border: 1px solid #ced4da;
+    padding: 5px 8px;
+    margin-right: 25px;
+    font-size: 14px;
+    color: #495057;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.payform__item + .payform__item {
+    margin-top: 40px;
+}
+.payform__item h3 {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 17px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.payform-right {
+    margin-top: 20px;
+}
+
+.form__radio {
+    display: block;
+    position: relative;
+    padding-left: 45px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.form__radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.check-radio {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+.form__radio input:checked + .check-radio::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background-color: #4805d9;
+    border-radius: 50%;
+    
+}
+.pay-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa theo chiều ngang */
+}
+
+.payform-right {
+    margin-left:250px;
+    margin-top: 20px;
+}
+.payment-methods__detail{
+    margin-left:250px;
+    margin-right:250px;
+    margin-top: 10px;
+}
+@media (max-width: 768px){
+.payform-right {
+    margin-left: 0;
+}
+}
+@media (max-width: 768px){
+    .payment-methods__detail{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    }
+
+.payform-note {
+    font-size: 14px;
+    margin: 15px 0 15px 10px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.example-content {
+    border-radius: 2px;
+    background-color: #ff001336;
+    max-width: 388px;
+    padding: 15px 10px;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.43;
+    text-transform: uppercase;
+}
+.bankpay-box .payform-note {
+    margin-left: 0px;
+    font-weight: 400;
+}
+.payform-note {
+    font-size: 14px;
+    margin: 15px 0 15px 10px;
+    font-weight: 500;
+}
+.nav-bank__item .nav-link.active {
+    border: 1px solid blue;
+}
+.nav-bank__item img {
+    height: auto;
+    object-fit: cover;
+    max-width: 100%;
+}
+.nav-bank__item .nav-link {
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.pay-btn:hover {
+    background-color: #013766 !important;
+}
+.apply-btn:hover {
+    background-color: rgb(244, 243, 243);
+    color: blue;
+}
+
+.apply-btn {
+    background-color: #0f62ac;
+    border: 1px solid #fff;
+    padding: 5px 0;
+    border-radius: 5px;
+    margin-top: 5px;
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+}

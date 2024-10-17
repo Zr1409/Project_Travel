@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="myapp">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS36614_Tran Van Du</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="images/favicon.ico">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</head>
+
+<body>
+  <div ng-include="'header.html'"></div>
+  <div ng-view></div>
+  <div ng-include="'footer.html'"></div>
+  <script>
+    var app = angular.module("myapp", ["ngRoute"]);
+
+    app.config(function ($routeProvider) {
+      $routeProvider
+        .when("/", { templateUrl: "trangchu.html", controller: "myCtrlTrangChu" })
+        .when("/trangchu", { templateUrl: "trangchu.html", controller: "myCtrlTrangChu" })
+        .when("/tourhanoi", { templateUrl: "tourhanoi.html", controller: "myCtrlTourHaNoi" })
+        .when("/tourdalat", { templateUrl: "tourdalat.html", controller: "myCtrlTourHaNoi" })
+        .when("/tourhalong", { templateUrl: "tourhalong.html", controller: "myCtrlTourHaNoi" })
+        .when("/toursapa", { templateUrl: "toursapa.html", controller: "myCtrlTourHaNoi" })
+        .when("/tourdanang", { templateUrl: "tourdanang.html", controller: "myCtrlTourHaNoi" })
+        .when("/dulichtrongnuoc", { templateUrl: "dulichtrongnuoc.html", controller: "myCtrlDLTrongNuoc" })
+        .when("/chitiet", { templateUrl: "chitiet.html", controller: "myCtrlChiTiet" })
+        .when("/chitiet/:id", { templateUrl: "chitiet.html", controller: "myCtrlChiTiet" })
+        .when("/timkiemtour", { templateUrl: "timkiemtour.html", controller: "myCtrlTimKiem" })
+        .when("/lienhe", { templateUrl: "lienhe.html", controller: "myCtrlLienHe" })
+        .when("/giohang", { templateUrl: "giohang.html", controller: "myCtrlGioHang" })
+        .when("/giohang/:id", { templateUrl: "giohang.html", controller: "myCtrlGioHang" })
+        .when("/login", { templateUrl: "login.html", controller: "LoginCtrl" })
+        .when("/hosodangnhap", { templateUrl: "hosodangnhap.html", controller: "myCtrlHoSoDangNhap" })
+        .when("/dangky", { templateUrl: "dangky.html", controller: "RegisterCtrl" })
+        .when("/detail/:id", { templateUrl: "dulichtrongnuoc.html", controller: "myCtrl" })
+        .otherwise({ redirectTo: "/" });
+    });
+    // Read file Json
+    // npx json-server db.json
+    // node server.js
+
+    app.controller("myCtrlTrangChu", function ($scope, $routeParams, $http, $location, $anchorScroll) {
+      $anchorScroll();
+      $scope.products = [];
+      $http.get("http://localhost:3000/products").then(function (response) {
+        $scope.products = response.data;
+        console.log($scope.products);
+        $scope.detailPro = $scope.products.find(item => item.id == $routeParams.id);
+      }).catch(function (error) {
+        console.error("Error fetching data:", error);
+      });
+
+      $scope.search = function () {
+        var searchParams = {
+          priceRange: $scope.selectedPriceRange,
+          numberOfDays: $scope.selectedNumberOfDays,
+          nameTour: $scope.selectedNameTour
+        };
+        $scope.currentPage = 1;
+        $location.path('/timkiemtour').search(searchParams);
+
+      };
+
+    });
+
+    // Search
+
+    app.controller("myCtrlTimKiem", function ($scope, $routeParams, $location, $http, $anchorScroll) {
+      $anchorScroll();
+      $scope.sortType = ''; // Biến sắp xếp theo
+      $scope.sortReverse = false; // Biến sắp xếp ngược
+      $scope.products = [];
+      var selectedPriceRange = $routeParams.priceRange;
+      var selectedNumberOfDays = $routeParams.numberOfDays;
+      var selectedCategory = $routeParams.category;
+      var selectedNameTour = $routeParams.nameTour;
+
+      $http.get("http://localhost:3000/products").then(function (response) {
+        $scope.products = response.data;
+        console.log($scope.products);
+
+        $scope.filterProducts = function () {
+          var priceRanges = selectedPriceRange ? selectedPriceRange.split(',') : [];
+          var categories = selectedCategory ? selectedCategory.split(',') : [];
+
+          $scope.filteredProducts = $scope.products.filter(function (p) {
+            var matchesPriceRange = !selectedPriceRange || priceRanges.some(function (range) {
+              var bounds = range.split('-');
+              if (bounds.length === 2) {
+                return p.price >= parseInt(bounds[0]) && p.price <= parseInt(bounds[1]);
+              } else {
+                return p.price >= parseInt(bounds[0]);
+              }
+            });
+
+            var matchesNumberOfDays = !selectedNumberOfDays || p.duration === selectedNumberOfDays;
+            var matchesCategory = !selectedCategory || categories.some(function (category) {
+              return p.category.toLowerCase() === category.toLowerCase();
+            });
+
+            var matchesNameTour = !selectedNameTour || p.title.toLowerCase().includes(selectedNameTour.toLowerCase());
+
+            return matchesPriceRange && matchesNumberOfDays && matchesCategory && matchesNameTour;
+          });
+
+          // Thêm logic sắp xếp
+          if ($scope.sortType) {
+            $scope.filteredProducts.sort((a, b) => {
+              if ($scope.sortType === 'price') {
+                if ($scope.sortReverse) {
+                  return b.price - a.price; // Giảm dần
+                } else {
+                  return a.price - b.price; // Tăng dần
+                }
+              }
+              return 0;
+            });
+          }
+        };
+
+        $scope.updateFilters = function () {
+          // Cập nhật selectedPriceRange
+          var selectedPriceCheckboxes = document.querySelectorAll('input[type="checkbox"].price-filter:checked');
+          var selectedPriceRanges = Array.from(selectedPriceCheckboxes).map(function (checkbox) {
+            return checkbox.getAttribute('data-id');
+          });
+          selectedPriceRange = selectedPriceRanges.join(',');
+
+          // Cập nhật selectedCategory
+          var selectedTourCheckboxes = document.querySelectorAll('input[type="checkbox"].menu-filter:checked');
+          var selectedTourTypes = Array.from(selectedTourCheckboxes).map(function (checkbox) {
+            return checkbox.getAttribute('data-id');
+          });
+          selectedCategory = selectedTourTypes.join(',');
+
+          // Gọi filterProducts để lọc sản phẩm
+          $scope.filterProducts();
+        };
+
+        $scope.filterProducts();
+
+        $scope.$watch('currentPage', function () {
+          $scope.filterProducts();
+        });
+
+        $scope.range = function (n) {
+          return Array.from(Array(n).keys());
+        };
+
+        $scope.totalPages = function () {
+          return Math.ceil($scope.filteredProducts.length / $scope.itemsPerPage);
+        };
+
+        $scope.paginatedProducts = function () {
+          var begin = ($scope.currentPage - 1) * $scope.itemsPerPage;
+          var end = begin + $scope.itemsPerPage;
+          return $scope.filteredProducts.slice(begin, end);
+        };
+
+        $scope.itemsPerPage = 4;
+        $scope.currentPage = 1;
+
+        $scope.prevPage = function () {
+          if ($scope.currentPage > 1) {
+            $scope.currentPage--;
+            $anchorScroll();
+          }
+        };
+
+        $scope.nextPage = function () {
+          if ($scope.currentPage < $scope.totalPages()) {
+            $scope.currentPage++;
+            $anchorScroll();
+          }
+        };
+
+        $scope.setPage = function (page) {
+          $scope.currentPage = page;
+          $anchorScroll();
+        };
+
+      }).catch(function (error) {
+        console.error("Error fetching data:", error);
+      });
+    });
+
+
+    // Tour ha noi
+    // Tour ha noi
+    app.controller('myCtrlTourHaNoi', function ($scope, $routeParams, $http, $anchorScroll) {
+      $anchorScroll();
+      $scope.sortType = ''; // Biến sắp xếp theo
+      $scope.sortReverse = false; // Biến sắp xếp ngược
+      $scope.products = [];
+      $http.get("http://localhost:3000/products").then(function (response) {
+        $scope.products = response.data;
+        console.log($scope.products);
+        $scope.detailPro = $scope.products.find(item => item.id == $routeParams.id);
+      }).catch(function (error) {
+        console.error("Error fetching data:", error);
+      });
+
+      $scope.sortType2 = ''; // Biến sắp xếp theo
+      $scope.sortReverse2 = false; // Biến sắp xếp ngược
+
+    });
+
+    // Login // Login
+    // Login // Login
+    app.controller("LoginCtrl", function ($scope, $window, $anchorScroll, $location, $http, $rootScope) {
+      $anchorScroll();
+      $scope.submitted = false;
+
+      // Hàm xử lý đăng nhập
+      $scope.submitForm = function () {
+        $scope.submitted = true;
+        if ($scope.frBonus.$valid) {
+          // Lấy thông tin đăng nhập từ người dùng
+          var username = $scope.fullname;
+          var password = $scope.password;
+
+          // Thực hiện yêu cầu GET để lấy danh sách người dùng
+          $http.get("http://localhost:3000/users").then(function (response) {
+            var users = response.data;
+
+            // So sánh thông tin đăng nhập với dữ liệu từ server
+            var validUser = users.find(function (user) {
+              return user.fullname === username && user.password === password;
+            });
+
+            if (validUser) {
+              alert("Đăng nhập thành công!");
+              // Lưu thông tin đăng nhập vào Local Storage
+              localStorage.setItem('loggedInUser', JSON.stringify({
+                id: validUser.id,
+                fullname: validUser.fullname,
+                email: validUser.email,
+                phone: validUser.phone,
+                password: validUser.password,
+                hinhdaidien: validUser.hinhdaidien
+              }));
+              // Lưu thông tin đăng nhập vào $rootScope
+              $rootScope.loggedInUser = {
+                id: validUser.id,
+                fullname: validUser.fullname,
+                email: validUser.email,
+                phone: validUser.phone,
+                password: validUser.password,
+                hinhdaidien: validUser.hinhdaidien
+              };
+
+              // Chuyển hướng đến trang hồ sơ
+              $location.path("/hosodangnhap");
+            } else {
+              // Nếu không trùng khớp, hiển thị thông báo lỗi
+              alert("Tên đăng nhập hoặc mật khẩu không đúng!");
+            }
+          }).catch(function (error) {
+            // Nếu có lỗi xảy ra khi thực hiện yêu cầu GET, hiển thị thông báo lỗi
+            console.error("Error occurred while fetching users:", error);
+            alert("Đã xảy ra lỗi khi kiểm tra thông tin đăng nhập. Vui lòng thử lại sau.");
+          });
+        }
+      };
+
+      // Hàm chuyển đổi hiển thị mật khẩu
+      $scope.passwordVisible = false;
+      $scope.eyeIcon = 'bi-eye-fill';
+      $scope.togglePasswordVisibility = function () {
+        $scope.passwordVisible = !$scope.passwordVisible;
+        $scope.eyeIcon = $scope.passwordVisible ? 'bi-eye-slash-fill' : 'bi-eye-fill';
+      };
+    });
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    app.controller('myCtrlHoSoDangNhap', function ($scope, $rootScope, $location, $http, $anchorScroll) {
+      $anchorScroll();
+      // Kiểm tra xem có thông tin người dùng đã được lưu trong Local Storage không
+      if (localStorage.getItem('loggedInUser')) {
+        $rootScope.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+      }
+      else {
+        // Nếu không có thông tin người dùng trong Local Storage, chuyển hướng đến trang đăng nhập
+        $location.path('/login');
+      }
+      // Hàm cập nhật thông tin người dùng
+      var updateUserInfo = function () {
+        $scope.id = $rootScope.loggedInUser.id;
+        $scope.username = $rootScope.loggedInUser.fullname;
+        $scope.email = $rootScope.loggedInUser.email;
+        $scope.phone = $rootScope.loggedInUser.phone;
+        $scope.password = $rootScope.loggedInUser.password;
+        $scope.hinhdaidien = $rootScope.loggedInUser.hinhdaidien;
+      };
+
+      if ($rootScope.loggedInUser && Object.keys($rootScope.loggedInUser).length > 0) {
+        updateUserInfo();
+      } else {
+        console.error("Không tìm thấy thông tin người dùng!");
+        // Thêm các logic xử lý khác ở đây nếu cần
+      }
+
+      $scope.displayProfilePic = function () {
+        var file = document.getElementById('profilePicInput').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          $scope.$apply(function () {
+            // Cập nhật ảnh người dùng
+            $scope.hinhdaidien = reader.result;
+            $rootScope.loggedInUser.hinhdaidien = reader.result;
+
+            // Lưu thông tin người dùng vào Local Storage
+            localStorage.setItem('loggedInUser', JSON.stringify($rootScope.loggedInUser));
+
+            // Ghi đè dữ liệu mới vào tệp JSON
+            $http.put("http://localhost:3000/users/" + $scope.id, $rootScope.loggedInUser)
+              .then(function (response) {
+                console.log("Dữ liệu đã được cập nhật trong tệp JSON");
+                updateUserInfo(); // Cập nhật thông tin người dùng sau khi cập nhật hình đại diện thành công
+              })
+              .catch(function (error) {
+                console.error("Lỗi khi cập nhật dữ liệu trong tệp JSON:", error);
+              });
+          });
+        };
+
+        if (file) {
+          reader.readAsDataURL(file);
+        }
+      };
+
+      // Hàm đổi mật khẩu
+      $scope.changePassword = function () {
+        var currentPassword = $scope.currentPassword;
+        var newPassword = $scope.newPassword;
+        var confirmPassword = $scope.confirmPassword;
+
+        if (currentPassword !== $scope.password) {
+          $scope.passwordError = true; // Hiển thị thông báo lỗi mật khẩu hiện tại không đúng
+          return;
+        } else if (newPassword !== confirmPassword) {
+          $scope.confirmPasswordError = true; // Hiển thị thông báo lỗi mật khẩu mới và xác nhận mật khẩu mới không khớp
+          return;
+        } else {
+          // Cập nhật mật khẩu mới vào dữ liệu người dùng và lưu vào Local Storage
+          $rootScope.loggedInUser.password = newPassword;
+          localStorage.setItem('loggedInUser', JSON.stringify($rootScope.loggedInUser));
+
+          // Ghi đè dữ liệu mới vào tệp JSON
+          $http.put("http://localhost:3000/users/" + $scope.id, $rootScope.loggedInUser)
+            .then(function (response) {
+              console.log("Mật khẩu đã được cập nhật trong tệp JSON");
+              updateUserInfo(); // Cập nhật thông tin người dùng sau khi cập nhật mật khẩu thành công
+              alert("Mật khẩu đã được thay đổi thành công!");
+            })
+            .catch(function (error) {
+              console.error("Lỗi khi cập nhật mật khẩu trong tệp JSON:", error);
+            });
+        }
+        return true;
+      };
+
+      // Hàm chuyển đổi hiển thị mật khẩu
+      $scope.passwordVisible = false;
+      $scope.eyeIcon = 'bi-eye-fill';
+      $scope.passwordVisible2 = false;
+      $scope.eyeIcon2 = 'bi-eye-fill';
+      $scope.passwordVisible3 = false;
+      $scope.eyeIcon3 = 'bi-eye-fill';
+      $scope.togglePasswordVisibility = function () {
+        $scope.passwordVisible = !$scope.passwordVisible;
+        $scope.eyeIcon = $scope.passwordVisible ? 'bi-eye-slash-fill' : 'bi-eye-fill';
+      };
+      $scope.togglePasswordVisibility2 = function () {
+        $scope.passwordVisible2 = !$scope.passwordVisible2;
+        $scope.eyeIcon2 = $scope.passwordVisible2 ? 'bi-eye-slash-fill' : 'bi-eye-fill';
+      };
+      $scope.togglePasswordVisibility3 = function () {
+        $scope.passwordVisible3 = !$scope.passwordVisible3;
+        $scope.eyeIcon3 = $scope.passwordVisible3 ? 'bi-eye-slash-fill' : 'bi-eye-fill';
+      };
+      // Hàm đăng xuất
+      $scope.logout = function () {
+        // Xoá thông tin người dùng từ Local Storage
+        localStorage.removeItem('loggedInUser');
+        // Chuyển hướng đến trang đăng nhập
+        $location.path('/login');
+      };
+    });
+
+
+
+    //DangKy
+    //DangKy
+    app.controller("RegisterCtrl", function ($scope, $window, $anchorScroll, $location, $http) {
+      // Cuộn đến đầu trang khi controller được khởi tạo
+      $anchorScroll();
+
+      // Khởi tạo các biến
+      $scope.submitted = false;
+      $scope.passwordsDoNotMatch = false;
+
+      // Lấy dữ liệu người dùng từ localStorage
+      $scope.users = [];
+      $http.get("http://localhost:3000/users").then(function (response) {
+        $scope.users = response.data;
+        console.log($scope.users);
+      });
+      $scope.checkPasswordMatch = function () {
+        if ($scope.password !== $scope.xnpassword) {
+          // Nếu mật khẩu và xác nhận mật khẩu không khớp
+          $scope.passwordsDoNotMatch = true;
+        } else {
+          $scope.passwordsDoNotMatch = false;
+        }
+      };
+      // Hàm gửi biểu mẫu
+      $scope.submitForm = function () {
+        if ($scope.frBonus.$valid) {
+          // Kiểm tra xem tên đăng nhập và email đã tồn tại hay chưa
+          var isDuplicate = $scope.users.some(function (user) {
+            return user.fullname === $scope.fullname || user.email === $scope.email;
+          });
+
+          if (isDuplicate) {
+            // Nếu tên đăng nhập hoặc email đã tồn tại, hiển thị thông báo và dừng hàm
+            alert("Tên đăng nhập hoặc email đã tồn tại!");
+            return;
+          }
+
+          // Tạo đối tượng người dùng mới
+          var newUser = {
+            id: ($scope.users.length + 1).toString(),
+            fullname: $scope.fullname,
+            email: $scope.email,
+            phone: $scope.phone,
+            password: $scope.password,
+            hinhdaidien: null
+          };
+
+          // Thêm người dùng mới vào mảng và gửi đến máy chủ
+          $http.post("http://localhost:3000/users", newUser).then(function (response) {
+            // Thêm người dùng mới vào mảng $scope.users
+            $scope.users.push(response.data);
+
+            // Hiển thị thông báo thành công
+            alert("Đăng ký thành công!");
+            $location.path("/login");
+
+            // Đặt lại biểu mẫu
+            $scope.fullname = '';
+            $scope.email = '';
+            $scope.phone = '';
+            $scope.password = '';
+            $scope.xnpassword = '';
+            $scope.agree = false;
+            $scope.submitted = false;
+            $scope.passwordsDoNotMatch = false;
+          }).catch(function (error) {
+            console.error("Error occurred during user registration:", error);
+            alert("Đã xảy ra lỗi khi đăng ký. Vui lòng thử lại sau.");
+          });
+        } else {
+          $scope.submitted = true;
+        }
+      };
+
+      // Hàm chuyển đổi hiển thị mật khẩu
+      $scope.passwordVisible = false;
+      $scope.eyeIcon = 'bi-eye-fill';
+      $scope.passwordVisible2 = false;
+      $scope.eyeIcon2 = 'bi-eye-fill';
+      $scope.togglePasswordVisibility = function () {
+        $scope.passwordVisible = !$scope.passwordVisible;
+        $scope.eyeIcon = $scope.passwordVisible ? 'bi-eye-slash-fill' : 'bi-eye-fill';
+      };
+      $scope.togglePasswordVisibility2 = function () {
+        $scope.passwordVisible2 = !$scope.passwordVisible2;
+        $scope.eyeIcon2 = $scope.passwordVisible2 ? 'bi-eye-slash-fill' : 'bi-eye-fill';
+      };
+    });
+
+
+
+
+    app.controller("myCtrlLienHe", function ($scope, $anchorScroll) {
+      $anchorScroll();
+      $scope.submitted = false;
+      $scope.submitForm = function () {
+        if ($scope.frBonus.$valid) {
+          alert("Form hợp lệ!");
+        } else {
+          $scope.submitted = true;
+        }
+      };
+    });
+
+    // Chi tiết hà nội
+    app.controller("myCtrlChiTiet", function ($scope, $routeParams, $http, $anchorScroll) {
+      $anchorScroll(); // Cuộn lên đầu trang khi trang được load
+      $scope.showScenicTab1 = function () {
+
+        document.getElementById("menu1").style.display = "block"; // Hiển thị nội dung tab thắng cảnh
+        document.getElementById("menu2").style.display = "none";  // Ẩn nội dung tab du khách
+        document.getElementById("menu3").style.display = "none";  // Ẩn nội dung tab ẩm thực
+      };
+      $scope.showScenicTab2 = function () {
+
+        document.getElementById("menu2").style.display = "block"; // Hiển thị nội dung tab thắng cảnh
+        document.getElementById("menu1").style.display = "none";  // Ẩn nội dung tab du khách
+        document.getElementById("menu3").style.display = "none";  // Ẩn nội dung tab ẩm thực
+      };
+      $scope.showScenicTab3 = function () {
+
+        document.getElementById("menu3").style.display = "block"; // Hiển thị nội dung tab thắng cảnh
+        document.getElementById("menu1").style.display = "none";  // Ẩn nội dung tab du khách
+        document.getElementById("menu2").style.display = "none";  // Ẩn nội dung tab ẩm thực
+      };
+      $scope.showScenicTab4 = function () {
+
+        document.getElementById("menu4").style.display = "block"; // Hiển thị nội dung tab thắng cảnh
+        document.getElementById("menu5").style.display = "none";  // Ẩn nội dung tab du khách
+        document.getElementById("menu6").style.display = "none";  // Ẩn nội dung tab ẩm thực
+      };
+      $scope.showScenicTab5 = function () {
+
+        document.getElementById("menu5").style.display = "block"; // Hiển thị nội dung tab thắng cảnh
+        document.getElementById("menu4").style.display = "none";  // Ẩn nội dung tab du khách
+        document.getElementById("menu6").style.display = "none";  // Ẩn nội dung tab ẩm thực
+      };
+      $scope.showScenicTab6 = function () {
+
+        document.getElementById("menu6").style.display = "block"; // Hiển thị nội dung tab thắng cảnh
+        document.getElementById("menu4").style.display = "none";  // Ẩn nội dung tab du khách
+        document.getElementById("menu5").style.display = "none";  // Ẩn nội dung tab ẩm thực
+      };
+      $scope.detailPro = null;
+      if ($routeParams.id) {
+        $http.get("http://localhost:3000/products/" + $routeParams.id)
+          .then(function (response) {
+            if (response.data) {
+              $scope.detailPro = response.data;
+            } else {
+              console.error("Product not found");
+            }
+          })
+          .catch(function (error) {
+            console.error("Error fetching product detail:", error);
+          });
+      }
+    });
+    // Truyền nhận ID giỏ hàng
+    // Truyền nhận ID giỏ hàng
+    // Truyền nhận ID giỏ hàng
+    app.controller("myCtrlGioHang", function ($scope, $routeParams, $http, $anchorScroll, $rootScope) {
+      $anchorScroll(); // Cuộn lên đầu trang khi trang được load
+
+      // Khởi tạo giỏ hàng
+      $scope.gioHang = JSON.parse(localStorage.getItem('gioHang')) || [];
+      $rootScope.totalItems = 0; // Biến để lưu tổng số lượng mặt hàng trong giỏ hàng
+
+      $scope.submitForm = function () {
+        if ($scope.frBonus.$valid) {
+          alert("Đặt thành công!");
+        } else {
+          $scope.submitted = true;
+        }
+      };
+
+      $scope.addToCart = function (product) {
+        var found = false;
+        for (var i = 0; i < $scope.gioHang.length; i++) {
+          if ($scope.gioHang[i].id === product.id) {
+            $scope.gioHang[i].selectedNumber++;
+            $scope.updatePrice($scope.gioHang[i]);
+            found = true;
+            break;
+          }
+        }
+
+        if (!found) {
+          product.selectedNumber = 1;
+          product.totalPrice = product.price;
+          product.selectedCarNumber = 0;
+          product.totalCarPrice = product.carPrice * 0;
+          product.selectedYachtNumber = 0;
+          product.totalYachtPrice = product.yachtPrice * 0;
+          $scope.gioHang.push(product);
+        }
+
+        localStorage.setItem('gioHang', JSON.stringify($scope.gioHang));
+        $scope.calculateTotalPrice();
+        $scope.calculateTotalItems(); // Cập nhật tổng số lượng mặt hàng
+      };
+
+      $scope.removeFromCart = function (product) {
+        var index = $scope.gioHang.indexOf(product);
+        if (index !== -1) {
+          $scope.gioHang.splice(index, 1);
+          localStorage.setItem('gioHang', JSON.stringify($scope.gioHang));
+          $scope.calculateTotalPrice();
+          $scope.calculateTotalItems(); // Cập nhật tổng số lượng mặt hàng
+        }
+      };
+
+      if ($routeParams.id) {
+        $http.get("http://localhost:3000/products/" + $routeParams.id)
+          .then(function (response) {
+            if (response.data) {
+              $scope.detailPro = response.data;
+              $scope.addToCart($scope.detailPro);
+            } else {
+              console.error("Product not found");
+            }
+          })
+          .catch(function (error) {
+            console.error("Error fetching product detail:", error);
+          });
+      }
+
+      $scope.updatePrice = function (detailPro) {
+        detailPro.totalPrice = detailPro.selectedNumber * detailPro.price;
+        localStorage.setItem('gioHang', JSON.stringify($scope.gioHang));
+        $scope.calculateTotalPrice();
+      };
+
+      $scope.decreaseQuantity = function (detailPro) {
+        if (detailPro.selectedNumber > 1) {
+          detailPro.selectedNumber--;
+          $scope.updatePrice(detailPro);
+          $scope.calculateTotalItems(); // Cập nhật tổng số lượng mặt hàng
+        }
+      };
+
+      $scope.increaseQuantity = function (detailPro) {
+        if (detailPro.selectedNumber < 20) { // Kiểm tra nếu giá trị hiện tại chưa đạt tối đa
+          detailPro.selectedNumber++;
+          $scope.updatePrice(detailPro);
+          $scope.calculateTotalItems(); // Cập nhật tổng số lượng mặt hàng
+        }
+      };
+
+
+      $scope.updateCarPrice = function (detailPro) {
+        detailPro.totalCarPrice = detailPro.selectedCarNumber * detailPro.carPrice;
+        localStorage.setItem('gioHang', JSON.stringify($scope.gioHang));
+        $scope.calculateTotalPrice();
+      };
+
+      $scope.decreaseCarQuantity = function (detailPro) {
+        if (detailPro.selectedCarNumber > 0) {
+          detailPro.selectedCarNumber--;
+          $scope.updateCarPrice(detailPro);
+        }
+      };
+
+      $scope.increaseCarQuantity = function (detailPro) {
+        if (detailPro.selectedCarNumber < 20) {
+          detailPro.selectedCarNumber++;
+          $scope.updateCarPrice(detailPro);
+        }
+      };
+
+      $scope.updateYachtPrice = function (detailPro) {
+        detailPro.totalYachtPrice = detailPro.selectedYachtNumber * detailPro.yachtPrice;
+        localStorage.setItem('gioHang', JSON.stringify($scope.gioHang));
+        $scope.calculateTotalPrice();
+      };
+
+      $scope.decreaseYachtQuantity = function (detailPro) {
+        if (detailPro.selectedYachtNumber > 0) {
+          detailPro.selectedYachtNumber--;
+          $scope.updateYachtPrice(detailPro);
+        }
+      };
+
+      $scope.increaseYachtQuantity = function (detailPro) {
+        if (detailPro.selectedYachtNumber < 20) {
+          detailPro.selectedYachtNumber++;
+          $scope.updateYachtPrice(detailPro);
+        }
+      };
+      //Tính tổng tiền
+      $scope.calculateTotalPrice = function () {
+        $scope.totalPriceAll = $scope.gioHang.reduce(function (acc, item) {
+          return acc + item.totalPrice + item.totalCarPrice + item.totalYachtPrice;
+        }, 0);
+      };
+
+      // Khởi tạo giá trị tổng tiền
+      $scope.calculateTotalPrice();
+      // Tính số lượng trong giỏ hàng
+      $scope.calculateTotalItems = function () {
+        $rootScope.totalItems = $scope.gioHang.reduce(function (acc, item) {
+          return acc + item.selectedNumber;
+        }, 0);
+      };
+
+      // Khởi tạo giá trị tổng số lượng mặt hàng
+
+      $scope.calculateTotalItems();
+    });
+
+
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v19.0&appId=795056528939617"
+    nonce="5eTsCBbq"></script>
+</body>
+
+</html>

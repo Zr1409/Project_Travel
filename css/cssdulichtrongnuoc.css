@@ -1,0 +1,116 @@
+.gallery-box {
+    margin-top: 90px;
+    padding-bottom: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.box__content {
+    margin-bottom: 25px;
+}
+.gallery-box .box__head {
+    margin-bottom: 20px;
+}
+.sub-head {
+    font-size: 22px;
+}
+.box__head .sub-head {
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 1px;
+    display: inline-block;
+    border-bottom: 2px solid #ec70a2 !important;
+}
+.destination-box {
+    justify-content: flex-start;
+}
+.image-box__slide {
+    display: flex;
+    flex-wrap: wrap;
+}
+.destination__item {
+    flex-basis: 20%;
+    padding: 0px;
+}
+.image-box__item {
+    flex-basis: 20%;
+    padding: 0px 1px;
+    margin-top: 15px;
+    position: relative;
+    overflow: hidden;
+}
+.destination__img {
+    border-radius: 3px;
+    overflow: hidden;
+    height: 178px;
+}
+.destination__img img {
+    height: 100%;
+}
+.image-box__img img {
+    width: 100%;
+}
+img {
+    display: block;
+    max-width: 100%;
+}
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+.destination__text {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.image-box__text {
+    bottom: 10px;
+    left: 0px;
+    max-width: 100%;
+    transform: translateX(0) translateY(0);
+    transition: opacity 0.3s ease;
+}
+.destination__text span {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-shadow: 0px 0px 5px #333;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+.image-box__item.destination__item {
+    position: relative;
+    overflow: hidden; /* Đảm bảo văn bản không vượt ra ngoài hình ảnh */
+}
+.box-center {
+    text-align: center;    
+}
+
+.btn--viewmore {
+    width: 150px;
+    padding: 5px 30px;
+    text-transform: capitalize;
+    font-size: 1.6rem;
+    color: #3b5ba6;
+    border-color: #3b5ba6 !important;
+    margin-top: 20px;
+}
+.btn {
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 1.4rem;
+    background-color: #fff;
+    color: #0087ff;
+    transition: all 0.3s ease;
+}
+.btn--viewmore:hover{
+    background-color: #3b5ba6!important;
+    color: white !important;
+}
+
+
